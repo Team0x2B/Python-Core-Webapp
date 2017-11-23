@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+
+<!-- <link href="MattStyle.css" type="text/css" rel="stylesheet"> -->
+<link rel="stylesheet" href="../static/style.css" type="text/css">
+<meta name=viewport content="width=device-width, initial-scale=1, user-scalable=yes">
+<form action="/createAccount" method="POST">
+	<div class="createAccount">
+		<div class="createAccount-screen">
+			<div class="app-title">
+				<h1>Create an account</h1>
+			</div>
+			<div class="createAccount-form">
+				<div class="control-group">
+					<input type="text" class="createAccount-field" value="" placeholder="First.Last@colorado.edu" name="username">
+					<label class="createAccount-field-icon fui-user" for="createAccount-name"></label>
+				</div>
+
+				<div class="control-group">
+					<input type="password" class="createAccount-field" value="" placeholder="Password" name="password">
+					<input type="password" class="createAccount-field" value="" placeholder="Confirm Password" name="confirm-password">
+					<label class="createAccount-field-icon fui-lock" for="createAccount-pass"></label>
+				</div>
+
+				<input type="submit" value=" Create Account" class="makeAccount btn-primary btn-large btn-block" >
+				<br>
+			</div>
+		</div>
+	</div>
+</form>

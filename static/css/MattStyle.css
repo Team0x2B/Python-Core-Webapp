@@ -1,3 +1,6 @@
+/*css file for createAccount.html
+It is the same format as style.css for login.html but I didn't know how to display createAccount.html and develop it properly*/
+
 * {
 	box-sizing: border-box;
 }
@@ -14,11 +17,10 @@ body {
 	margin: 10% auto;
 	width: 100%;
 	max-width: 700px;
-	min-width: 300px;
 }
 .login-screen {
 	text-align:center;
-	width:	100%;
+	width: 100%;
 	max-width: 700px;
 	min-width: 200px;	/* Not sure how to correctly do the minimum width. This doesn't do what I want it to do
 							I want it to behave like min-height does*/
@@ -39,9 +41,7 @@ body {
 	text-align: center;
 }
 .control-group {
-	margin-bottom: 10px;		/* Not sure how to get the confirm password with proper spacing below the regular password
-									I think that the change needs to be made here*/
-
+	margin-bottom: 10px;
 }
 
 input {
@@ -62,7 +62,7 @@ input:focus {
 	box-shadow: none;
 }
 
-.btn {
+/*.btn {
 	border: 2px solid transparent;
 	background: #000;
 	color: #ffffff;
@@ -77,18 +77,11 @@ input:focus {
 	display: block;
 	width: 100%;
 	max-width: 700px;
-	margin: 0 auto;
+	margin: 10px auto;
 }
 
 .btn:hover {
 	background-color: #2980B9;
-}
-
-/*.login-link {
-	font-size: 12px;
-	color: #444;
-	display: block;
-	margin-top: 12px;
 }*/
 
 
@@ -116,14 +109,28 @@ input:focus {
 }
 
 
+.login-link {
+	font-size: 112px;
+	color: #444;
+	display: block;
+	margin-top: 12px;
+}
 
-.createAccount {
+
+
+
+/************************************************************************************************************************/
+/*This stuff is for the Create Account page from createAccount.html*/
+
+
+
+.mainScreen {
 	margin: 10% auto;
 	width: 100%;
 	max-width: 700px;
 }
 
-.createAccount-screen {
+.mainScreen-screen {
 	text-align:center;
 	width: 100%;
 	max-width: 700px;
@@ -134,4 +141,56 @@ input:focus {
 	background-color: #FFF;
 	padding: 2%;
 	border-radius: 15px;
+}
+
+.app-title {
+	text-align: center;
+	color: #777;
+}
+
+.mainScreen-form {
+	text-align: center;
+}
+.control-group {
+	margin-bottom: 10px;
+}
+
+input {
+	text-align: center;
+	background-color: #ECF0F1;
+	border: 2px solid transparent;
+	border-radius: 3px;
+	font-size: 16px;
+	font-weight: 200;
+	padding: 10px;
+	width: 100%;
+	max-width: 700px;
+	transition: border .5s;
+}
+
+input:focus {
+	border: 2px solid #3498DB;
+	box-shadow: none;
+}
+
+.createAccount {
+	border: 2px solid transparent;
+	background: #444;
+	color: #ffffff;
+	font-size: 16px;
+	line-height: 25px;
+	padding: 10px ;
+	text-decoration: none;
+	text-shadow: none;
+	border-radius: 3px;
+	box-shadow: none;
+	transition: 0.25s;
+	display: block;
+	width: 100%;
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+.createAccount:hover {
+	background-color: #2980B9;
 }
