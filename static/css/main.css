@@ -15,6 +15,7 @@
 		font-size: 100%;
 		font: inherit;
 		vertical-align: baseline;
+		
 	}
 
 	article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
@@ -2613,15 +2614,17 @@
 
 			ul.actions.fit {
 				display: table;
-				margin-left: -1em;
+				margin-left: 1em;
 				padding: 0;
 				table-layout: fixed;
-				width: calc(100% + 1em);
+				min-width: 300px;
+				
 			}
 
 				ul.actions.fit li {
 					display: table-cell;
 					padding: 0 0 0 1em;
+					
 				}
 
 					ul.actions.fit li > * {
@@ -3155,6 +3158,7 @@
 		.wrapper.style2 {
 			background-color: #fbfbfb;
 			color: #999999;
+			
 		}
 
 			.wrapper.style2 input[type="submit"],
@@ -3619,7 +3623,7 @@
 	@media screen and (max-width: 480px) and (orientation: portrait) {
 
 		.wrapper {
-			padding: 40px;
+			padding: 2em 1em 0.1em 1em ;
 		}
 
 	}
