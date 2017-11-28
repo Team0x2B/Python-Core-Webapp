@@ -3,7 +3,10 @@ from flask import Flask, flash, redirect, render_template, request, session, abo
 import os
 from sqlalchemy.orm import sessionmaker
 from tabledef import *
+
+
 engine = create_engine('sqlite:///users.db', echo=True)
+session_factory = sessionmaker(bind=engine)
  
 app = Flask(__name__)
   
@@ -26,17 +29,33 @@ def create():
     return render_template("CreateAccount.html")
 
 
+@app.route('/createAccount', methods=['POST'])
+def do_create_account():
+    username = str(request.form['username'])
+    password = str(request.form['password'])
+    confirm_password = str(request.form['confirm-password'])
+
+    if password != confirm_password:
+        flash("passwords didn't match")
+        return create()
+
+    s = session_factory()
+    new_user = User(username, password, "", 0, 0)
+    s.add(new_user)
+    s.commit()
+    return home()
+
+
 @app.route('/login', methods=['POST'])
 def do_admin_login():
          
     POST_USERNAME = str(request.form['username'])
     POST_PASSWORD = str(request.form['password'])
     
-    Session = sessionmaker(bind=engine)
-    s = Session()
+    s = session_factory()
     query = s.query(User).filter(User.username.in_([POST_USERNAME]), User.password.in_([POST_PASSWORD]) )
     result = query.first()
-    #print(result)
+
     if result:
         session['logged_in'] = True
     else:
