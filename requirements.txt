@@ -58,7 +58,6 @@ pycrypto==2.6.1
 pycurl==7.43.0
 pyflakes==1.6.0
 Pygments==2.2.0
-pygpgme==0.3
 pyliblzma==0.5.3
 pyOpenSSL==16.2.0
 PySocks==1.5.6
