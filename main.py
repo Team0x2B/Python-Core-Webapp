@@ -35,14 +35,25 @@ def do_create_account():
     password = str(request.form['password'])
     confirm_password = str(request.form['confirm-password'])
 
+    if len(username) == 0 or len(password) == 0 or len(confirm_password) == 0:
+        flash("You must complete all fields!")
+        return create()
+
     if password != confirm_password:
-        flash("passwords didn't match")
+        flash("Passwords didn't match!")
         return create()
 
     s = session_factory()
+    query = s.query(User).filter(User.username.in_([username]))
+    result = query.first()
+    if result is not None:
+        flash("Username: '{}' is already in use!".format(username))
+        return create()
+
     new_user = User(username, password, "", 0, 0)
     s.add(new_user)
     s.commit()
+    flash("Account created!")
     return home()
 
 
