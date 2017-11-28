@@ -1,5 +1,6 @@
 import datetime
 from sqlalchemy import create_engine
+from infoGen import Info
 from sqlalchemy.orm import sessionmaker
 from tabledef import *
 
