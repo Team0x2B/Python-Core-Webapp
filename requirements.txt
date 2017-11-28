@@ -36,7 +36,6 @@ kitchen==1.2.4
 lockfile==0.11.0
 lxml==3.7.2
 M2Crypto==0.25.1
-m2ext==0.1
 MarkupSafe==0.23
 marshmallow==2.10.5
 mccabe==0.6.1
