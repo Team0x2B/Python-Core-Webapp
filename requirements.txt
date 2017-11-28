@@ -14,7 +14,6 @@ cryptography==1.5.3
 cssselect==0.9.2
 decorator==4.0.11
 enum34==1.0.4
-euca2ools==3.4.1
 fedmsg==0.19.0
 flake8==3.5.0
 Flask==0.11.1
