@@ -1,11 +1,7 @@
-from sqlalchemy import *
-from sqlalchemy import create_engine, ForeignKey
-from sqlalchemy import Column, Date, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy import Column
 from main import db
 
-########################################################################
+
 class User(db.Model):
     """"""
     __tablename__ = "users"
@@ -17,7 +13,6 @@ class User(db.Model):
     locationX = Column(db.Float)
     locationY = Column(db.Float)
 
-#----------------------------------------------------------------------
     def __init__(self, username, password, s, x, y):
         """"""
         self.username = username
@@ -25,5 +20,6 @@ class User(db.Model):
         self.study = s
         self.locationX = x
         self.locationY = y
+
 # create tables
 db.create_all()
