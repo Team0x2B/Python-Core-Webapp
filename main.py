@@ -1,15 +1,15 @@
-from flask import Flask
-from flask import Flask, flash, redirect, render_template, request, session, abort
+from flask import Flask, flash, render_template, request, session
 import os
-from sqlalchemy.orm import sessionmaker
 from tabledef import *
+from flask_sqlalchemy import SQLAlchemy
 
 
-engine = create_engine('sqlite:///users.db', echo=True)
-session_factory = sessionmaker(bind=engine)
- 
 app = Flask(__name__)
-  
+ 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+
+db = SQLAlchemy(app)
+
 
 @app.route('/')
 def home():
@@ -43,7 +43,7 @@ def do_create_account():
         flash("Passwords didn't match!")
         return create()
 
-    s = session_factory()
+    s = db.session
     query = s.query(User).filter(User.username.in_([username]))
     result = query.first()
     if result is not None:
@@ -63,7 +63,7 @@ def do_admin_login():
     POST_USERNAME = str(request.form['username'])
     POST_PASSWORD = str(request.form['password'])
     
-    s = session_factory()
+    s = db.session
     query = s.query(User).filter(User.username.in_([POST_USERNAME]), User.password.in_([POST_PASSWORD]) )
     result = query.first()
 

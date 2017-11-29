@@ -3,21 +3,19 @@ from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy import Column, Date, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
-
-engine = create_engine('sqlite:///users.db', echo=True)
-Base = declarative_base()
+from main import db
 
 ########################################################################
-class User(Base):
+class User(db.Model):
     """"""
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True)
-    username = Column(String)
-    password = Column(String)
-    study = Column(String)
-    locationX = Column(Float)
-    locationY = Column(Float)
+    id = Column(db.Integer, primary_key=True)
+    username = Column(db.String)
+    password = Column(db.String)
+    study = Column(db.String)
+    locationX = Column(db.Float)
+    locationY = Column(db.Float)
 
 #----------------------------------------------------------------------
     def __init__(self, username, password, s, x, y):
@@ -28,4 +26,4 @@ class User(Base):
         self.locationX = x
         self.locationY = y
 # create tables
-Base.metadata.create_all(engine)
+db.create_all()
