@@ -2,12 +2,14 @@ from flask import Flask, flash, render_template, request, session
 import os
 from user import *
 from flask_sqlalchemy import SQLAlchemy
+import config
 
 
 app = Flask(__name__)
  
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = config.database_uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = config.secret_key
 
 db = SQLAlchemy(app)
 
