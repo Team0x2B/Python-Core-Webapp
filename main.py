@@ -30,7 +30,7 @@ def nearby():
 
 @app.route('/create')
 def create():
-    return render_template("CreateAccount.html")
+    return render_template("createAccount.html")
 
 
 @app.route('/createAccount', methods=['POST'])
