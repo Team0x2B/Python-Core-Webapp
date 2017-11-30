@@ -35,6 +35,9 @@ def create():
 
 @app.route('/createAccount', methods=['POST'])
 def do_create_account():
+    if session['logged_in']:
+        return home()
+
     username = str(request.form['username'])
     password = str(request.form['password'])
     confirm_password = str(request.form['confirm-password'])
