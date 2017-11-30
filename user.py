@@ -1,6 +1,7 @@
 from sqlalchemy import Column
-from main import db
+import main
 
+db = main.db
 
 class User(db.Model):
     """"""
