@@ -12,7 +12,7 @@ app.config['SECRET_KEY'] = config.secret_key
 
 db = SQLAlchemy(app)
 
-from user import User
+from user import *
 
 
 @app.route('/')

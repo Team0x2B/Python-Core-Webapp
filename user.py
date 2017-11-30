@@ -1,7 +1,5 @@
 from sqlalchemy import Column
-import main
-
-db = main.db
+from main import db
 
 class User(db.Model):
     """"""
@@ -22,5 +20,6 @@ class User(db.Model):
         self.locationX = x
         self.locationY = y
 
+User.__table__.drop(db.engine)
 # create tables
 db.create_all()
