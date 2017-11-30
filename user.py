@@ -20,6 +20,5 @@ class User(db.Model):
         self.locationX = x
         self.locationY = y
 
-User.__table__.drop(db.engine)
 # create tables
 db.create_all()
