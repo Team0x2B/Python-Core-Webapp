@@ -1,6 +1,5 @@
 from flask import Flask, flash, render_template, request, session
 import os
-from user import *
 from flask_sqlalchemy import SQLAlchemy
 import config
 
@@ -12,6 +11,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = config.secret_key
 
 db = SQLAlchemy(app)
+
+from user import User
 
 
 @app.route('/')
