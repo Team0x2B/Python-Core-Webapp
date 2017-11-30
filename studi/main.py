@@ -1,6 +1,13 @@
-from flask import flash, render_template, request, session
+from flask import flash, render_template, request, session, g
+import datetime
 from studi.user import User
 from studi import app, db
+
+@app.before_request
+def before_request():
+    session.permanent = True
+    app.permanent_session_lifetime = datetime.timedelta(hours=2)
+    session.modified = True
 
 
 @app.route('/')
