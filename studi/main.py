@@ -26,14 +26,13 @@ def nearby():
 
 @app.route('/create')
 def create():
+    if session.get('logged_in'):
+        return home()
     return render_template("createAccount.html")
 
 
 @app.route('/createAccount', methods=['POST'])
 def do_create_account():
-    if session.get('logged_in'):
-        return home()
-
     username = str(request.form['username'])
     password = str(request.form['password'])
     confirm_password = str(request.form['confirm-password'])
