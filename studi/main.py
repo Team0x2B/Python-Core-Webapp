@@ -1,7 +1,8 @@
-from flask import flash, render_template, request, session, g
+from flask import flash, render_template, request, session
 import datetime
 from studi.user import User
 from studi import app, db
+
 
 @app.before_request
 def before_request():
@@ -66,7 +67,7 @@ def do_admin_login():
     post_password = str(request.form['password'])
     
     s = db.session
-    query = s.query(User).filter(User.username.in_([post_username]), User.password.in_([post_password]) )
+    query = s.query(User).filter(User.username.in_([post_username]), User.password.in_([post_password]))
     result = query.first()
 
     if result:
