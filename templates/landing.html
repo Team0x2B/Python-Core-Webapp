@@ -56,17 +56,36 @@
 
     }
 
-
+//arts, humn, engr, math, nats, soci
     function setTopic()
     {
       if (document.getElementById('arts').checked) {
         topicval = 'arts';
       }
-   // TODO: Add other radio buttons
-      else
+      else if (document.getElementById('humn').checked)
       {
         topicval = 'humn';
       }
+	  else if (document.getElementById('engr').checked)
+      {
+        topicval = 'engr';
+      }
+	  else if (document.getElementById('math').checked)
+      {
+        topicval = 'math';
+      }
+	  else if (document.getElementById('nats').checked)
+      {
+        topicval = 'nats';
+      }
+	  else if (document.getElementById('soci').checked)
+      {
+        topicval = 'soci';
+      }
+	  else
+	  {
+		  topicval = 'none';
+	  }
 
       postdata = '{"study":"'+topicval+'"}';
       console.log("setTopic-ID:" + curid);

@@ -11,7 +11,7 @@ import flask_sqlalchemy
 
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
-engine = create_engine('sqlite:///users.db', echo=True)
+#engine = create_engine('sqlite:///users.db', echo=True)
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
