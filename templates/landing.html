@@ -24,14 +24,69 @@
   }
   </style>
 
+      <script>
+
+    var curid;
+    var curUser;
+    var curStudy;
+    var curLocationX;
+    var curLocationY;
+
+    function pageInit()
+    {
+      // current user data
+
+      curid = '{{ session[id] }}';
+      curUser =  '{{ session[username] }}';
+      curStudy = '{{ session[study] }}';
+      curLocationX = '{{ session[locationX] }}';
+      curLocationY = '{{ session[locationY] }}';
+
+      console.log("ID:" + curid);
+      console.log ("Current user: " + curUser);
+
+      //display username on screen
+      document.getElementById("curname").innerHTML = curUser;
+
+      console.log ("Current study: " + curStudy);
+
+      studybtn = document.getElementById(curStudy);
+      studybtn.checked = true;
+
+
+    }
+
+
+    function setTopic()
+    {
+      if (document.getElementById('arts').checked) {
+        topicval = 'arts';
+      }
+   // TODO: Add other radio buttons
+      else
+      {
+        topicval = 'humn';
+      }
+
+      postdata = '{"study":"'+topicval+'"}';
+      console.log("setTopic-ID:" + curid);
+      console.log("data:" + postdata);
+      myurl="api/saveUser/"+curid;
+      $.ajax( {url: myurl, type: "POST", contentType: "application/json", data:postdata });
+
+    }
+
+  </script>
+
+
 	</head>
 
-	<body id="top">
+	<body id="top" onload="pageInit()">
 
 		<!-- Header -->
 		<header id="header">
 			<div class="content">
-				<h1><a href="#">Welcome</a></h1>
+        <h1><a href="#">Welcome <div id=curname></div></a></h1>
 				<p>What would you like to Studi today?</p>
 				<ul class="actions">
 					<li><a href="#one" class="button special scrolly">Set Topic</a></li>
@@ -43,23 +98,26 @@
 		<!-- One -->
 		<section id="one" class="wrapper style2 special">
 			<header class="major">
-				<h2>Please set your study topic</h2>
+				<h2>What are you studying?</h2>
 			</header>
 			<form method="post" action="setTopic()">
 				<div class="row uniform">
 			    <ul class="actions fit">
 				    <li><input id="arts" name="topic" type="radio"><label for="arts">Arts           </label></li>
 				    <li><input id="humn" name="topic" type="radio"><label for="humn">Humanities     </label></li>
-				    <li><input id="appl" name="topic" type="radio"><label for="appl">Engineering</label></li>
+				    <li><input id="engr" name="topic" type="radio"><label for="engr">Engineering</label></li>
 			    </ul>
 			    <ul class="actions fit">
-				    <li><input id="form" name="topic" type="radio"><label for="form">Math</label></li>
+				    <li><input id="math" name="topic" type="radio"><label for="math">Math</label></li>
 				    <li><input id="nats" name="topic" type="radio"><label for="nats">Natural Science </label></li>
 				    <li><input id="soci" name="topic" type="radio"><label for="soci">Social Science </label></li>
 			    </ul>
+          <ul class="actions fit">
+            <li><input id="none" name="topic" type="radio"><label for="none">Nothing</label></li>
+          </ul>
 			    <div class="12u$">
 			      <input type="text" style="text-align:center" id="specific" placeholder="Specific topic">
-		        <a id="submit" onclick="setTopic()" type="submit" class="button special">Set Topic</a>
+		        <a id="submit" onclick="setTopic()" type="submit" class="button special">Save</a>
 			    </div>
 				</div>
 			</form>
@@ -87,19 +145,51 @@ var pos;
 var marker;
 var data;
 
+
 function initMap()
 {
   navigator.geolocation.getCurrentPosition(function(position){
 	  pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 	  map = new google.maps.Map(document.getElementById('map'),{center: pos,zoom: 16});
-	 
-	
+
+    /*
+    var service = new google.maps.places.PlacesService(map);
+    service.nearbySearch({location: new google.maps.LatLng(40.008836, -105.270801), radius: '100', type: ['university']}, function(results, status){  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      var place = results[i];
+      console.log(results[i]);
+
+    }
+    console.log("You are at: " + results[0].name);  // best result
+  } });
+*/
+
+
 
     // marker for current user
-	  infoWindow = new google.maps.Marker({position: pos,map: map,title:"You Are Here", icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png' });
-    infoWindow.setMap(map);
+	  infoWindow = new google.maps.Marker({position: pos,map: map,title:"You Are Here"});
+   	  infoWindow.setMap(map);
 
-        
+            var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+            '<div id="bodyContent">'+
+            '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+            'sandstone rock formation in the southern part of the '+
+            'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+            'south west of the nearest large town, Alice Springs; 450&#160;km '+
+            '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+            'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+            'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+            'Aboriginal people of the area. It has many springs, waterholes, '+
+            'rock caves and ancient paintings. Uluru is listed as a World '+
+            'Heritage Site.</p>'+
+            '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+            'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+            '(last visited June 22, 2009).</p>'+
+            '</div>'+
+            '</div>';
 
         //var mywindow = new google.maps.InfoWindow({
         //  content: contentString
@@ -108,17 +198,25 @@ function initMap()
 //https://stackoverflow.com/questions/15531390/adding-array-of-markers-in-google-map
 
     // Add marker for each user
-	  $.getJSON( "users", function( data ){
+	  $.getJSON( "api/getUsers", function( data ){
 
     $.each( data, function( key, val ){
         //console.log(data);
         console.log(val.username+":"+val.locationX+","+val.locationY+" "+val.study);
         pos = new google.maps.LatLng(val.locationX,val.locationY);
-        marker = new google.maps.Marker({position: pos,map: map,label: key.toString(), title: val.username});
+        marker = new google.maps.Marker({position: pos,map: map,label: key.toString(), title: val.username, style: {fill: '#76c043'} });
 
-       
+       google.maps.event.addListener(marker,'click', (function(marker,key){
+          return function() {
+          console.log("marker clicked");
+          //console.log(marker.get('map'));
+          console.log(key);
+          console.log(data[key]);
+          //console.log('clicked:'+marker.title);
+          //mywindow.open(marker.get('map'),marker);
+          }} )(marker,key) );
         //infoWindow.open(map);
-      //  marker.setMap(map);
+        marker.setMap(map);
         });
 
   });
@@ -136,7 +234,6 @@ function initMap()
 };
 
 </script>
-
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjznhok9lVS9qwe2DzQmJXg9TA2Ye2qkk&callback=initMap"
     async defer></script>
 
