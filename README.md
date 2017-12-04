@@ -1,5 +1,5 @@
 # Studi
-## The simple way™
+## The Simple Way™
 # 0x2B
 
 ## Mission Statement: To explore new technologies, seek out new skills, and to bodily go where no Sophomore has gone before.
