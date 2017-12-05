@@ -1,4 +1,5 @@
 from flask import flash, render_template, request, session
+from werkzeug.security import generate_password_hash,check_password_hash
 import datetime
 from studi.user import User
 from studi import app, db
@@ -52,7 +53,12 @@ def do_create_account():
         flash("Username: '{}' is already in use!".format(username))
         return create()
 
-    new_user = User(username, password, "", 0, 0)
+
+    hashed_password = generate_password_hash(password,method = 'sha256',salt_length = 32)
+
+    new_user = User(username, hashed_password, "", 0, 0)
+
+
     s.add(new_user)
     s.commit()
     flash("Account created!")
@@ -66,10 +72,12 @@ def do_admin_login():
     post_password = str(request.form['password'])
     
     s = db.session
-    query = s.query(User).filter(User.username.in_([post_username]), User.password.in_([post_password]))
+    query = s.query(User).filter(User.username.in_([post_username]))
     result = query.first()
+    success = check_password_hash(result.secret,post_password)
 
-    if result:
+
+    if success:
         session['logged_in'] = True
     else:
         flash('wrong password!')
