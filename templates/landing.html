@@ -36,11 +36,11 @@
     {
       // current user data
 
-      curid = '{{ session[id] }}';
-      curUser =  '{{ session[username] }}';
-      curStudy = '{{ session[study] }}';
-      curLocationX = '{{ session[locationX] }}';
-      curLocationY = '{{ session[locationY] }}';
+      curid = '{{ session['id'] }}';
+      curUser =  '{{ session['username'] }}';
+      curStudy = '{{ session['study'] }}';
+      curLocationX = '{{ session['locationX'] }}';
+      curLocationY = '{{ session['locationY'] }}';
 
       console.log("ID:" + curid);
       console.log ("Current user: " + curUser);
@@ -86,11 +86,13 @@
 	  {
 		  topicval = 'none';
 	  }
+	  console.log("topicval" + topicval)
 
       postdata = '{"study":"'+topicval+'"}';
       console.log("setTopic-ID:" + curid);
       console.log("data:" + postdata);
-      myurl="api/saveUser/"+curid;
+      myurl="https://localhost:4000/api/saveUser/"+curid;
+	  
       $.ajax( {url: myurl, type: "POST", contentType: "application/json", data:postdata });
 
     }

@@ -4,14 +4,14 @@ from tabledef import *
 from flask_restful import Resource, Api
 #from flask.ext.sqlalchemy import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
-import os,logging,sys,ssl
+import os,logging,sys,ssl, json
 import collections
 import BaseHTTPServer, SimpleHTTPServer
 import flask_sqlalchemy
 
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
-#engine = create_engine('sqlite:///users.db', echo=True)
+engine = create_engine('sqlite:///users.db', echo=True)
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -34,6 +34,7 @@ class Users(db.Model):
 # Define GET getUsers API
 @app.route('/api/getUsers')
 def getUsers():
+        logging.debug("inside getUsers")
         conn = engine.connect() # connect to database
         query = conn.execute("select * from users") # perform query
         rows = query.cursor.fetchall() # get all results
@@ -50,7 +51,7 @@ def getUsers():
           d['locationY'] = row[5]
           d['email']=row[6]
           results.append(d)
-        logging.debug(results)
+        #logging.debug(results)
 
         # return JSON results
         return jsonify(results)
@@ -58,11 +59,13 @@ def getUsers():
 #Define POST saveUser/<Id>
 @app.route('/api/saveUser/<int:id>',methods=['POST'])
 def saveUser(id):
+  logging.debug("Save API ID=" + str(id))
   user = Users.query.get(id)
   logging.debug(request.data);
   data = json.loads(request.data)
   user.study = data['study']
   db.session.commit()
+  logging.debug(data['study'])
   return jsonify( {'status':'ok'})
 
 
@@ -98,11 +101,17 @@ def do_admin_login():
     query = s.query(User).filter(User.username.in_([POST_USERNAME]), User.password.in_([POST_PASSWORD]) )
     result = query.first()
     #print(result)
+    logging.debug("***")
+    logging.debug(result)
+    logging.debug("***")
+
     if result:
         logging.debug('Logged in user: ' + result.username)
         session['logged_in'] = True
         session['id']=result.id
+        logging.debug("result id:" + str(result.id))
         session['username']=result.username
+        logging.debug("user:" + result.username)
         session['study']=result.study
         session['locationX']=result.locationX
         session['locationY']=result.locationY
