@@ -9,15 +9,15 @@ class User(db.Model):
 
     id = Column(db.Integer, primary_key=True)
     username = Column(db.String)
-    password = Column(db.String)
+    secret = Column(db.String)
     study = Column(db.String)
     locationX = Column(db.Float)
     locationY = Column(db.Float)
 
-    def __init__(self, username, password, s, x, y):
+    def __init__(self, username, secret, s, x, y):
         """"""
         self.username = username
-        self.password = password
+        self.secret = secret
         self.study = s
         self.locationX = x
         self.locationY = y
