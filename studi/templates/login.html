@@ -4,7 +4,14 @@
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
 {% else %}
-
+<body>
+	<center>
+	<div style="color: white">
+		<h1> What is STUDI?</h1>
+		<h3>STUDI is a webapp designed to make it easy for students like you to connect with other studying students!<br>
+Simply log in, set your topic and location, and find someone near you!</h3>
+	</div>
+	<div>
 <form action="/login" method="POST">
 	<div class="login">
 		<div class="login-screen">
@@ -30,7 +37,8 @@
 		</div>
 	</div>
 </form>
-
+	</div>
+	</center>
 {% endif %}
 {% endblock %}
 
