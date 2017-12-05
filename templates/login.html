@@ -4,7 +4,13 @@
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
 {% else %}
-
+<body>
+	<center>
+	<div style="color: white" >
+		<h1> What is STUDI? </h1>
+		<h3> STUDI is a webapp designed to make it easy for students like you to connect with other studying students! <br> Simply log in, set your topic and location, and find someone near you!</h3>
+	</div>
+	<div>
 <form action="/login" method="POST">
 	<div class="login">
 		<div class="login-screen">
@@ -23,7 +29,7 @@
 				</div>
 
 				<input type="submit" value="Log in" class="btn btn-primary btn-large btn-block" >
-                <input type="button" value="create" class="btn btn-primary btn-large btn-block" >
+                <input type="button" value="Create Account" class="btn btn-primary btn-large btn-block" >
 				<!--<a href="/create" class="makeAccount btn-primary btn-large btn-block" >Create Account</a> -->
 
 				<br>
@@ -31,7 +37,9 @@
 		</div>
 	</div>
 </form>
-
+	</div>
+	</center>
+</body>
 {% endif %}
 {% endblock %}
 
