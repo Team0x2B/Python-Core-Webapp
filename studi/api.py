@@ -1,6 +1,8 @@
 from flask import request, session, jsonify
 import datetime
-import logging, json, collections
+import logging
+import json
+import collections
 from studi import app, db
 from studi.user import User
 from studi.studygroup import StudyGroup
@@ -22,7 +24,7 @@ def handle_not_logged_in():
 @app.route('/api/getUsers')
 def get_users():
         logging.debug("inside getUsers")
-        conn = db.session # connect to database
+        conn = db.session  # connect to database
         query = conn.query(User)
         users = query.all()  # get all results
 

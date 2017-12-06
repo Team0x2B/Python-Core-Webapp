@@ -1,5 +1,5 @@
-from flask import flash, render_template, request, session, redirect, url_for, jsonify
-from werkzeug.security import generate_password_hash,check_password_hash
+from flask import flash, render_template, request, session, redirect, url_for
+from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 from studi import app, db
 from studi.user import User
