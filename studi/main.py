@@ -1,8 +1,10 @@
-from flask import flash, render_template, request, session
-from werkzeug.security import generate_password_hash,check_password_hash
 import datetime
-from studi.user import User
+
+from flask import flash, render_template, request, session, redirect, url_for
+from werkzeug.security import generate_password_hash, check_password_hash
+
 from studi import app, db
+from studi.user import User
 
 
 @app.before_request
@@ -28,7 +30,7 @@ def nearby():
 @app.route('/create')
 def create():
     if session.get('logged_in'):
-        return home()
+        return redirect(url_for('home'))
     return render_template("createAccount.html")
 
 
@@ -40,29 +42,26 @@ def do_create_account():
 
     if len(username) == 0 or len(password) == 0 or len(confirm_password) == 0:
         flash("You must complete all fields!")
-        return create()
+        return redirect(url_for('create'))
 
     if password != confirm_password:
         flash("Passwords didn't match!")
-        return create()
+        return redirect(url_for('create'))
 
     s = db.session
     query = s.query(User).filter(User.username.in_([username]))
     result = query.first()
     if result is not None:
         flash("Username: '{}' is already in use!".format(username))
-        return create()
+        return redirect(url_for('create'))
 
-
-    hashed_password = generate_password_hash(password,method = 'sha256',salt_length = 32)
-
-    new_user = User(username, hashed_password, "", 0, 0)
-
+    hashed_password = generate_password_hash(password, method='sha256', salt_length=32)
+    new_user = User(username, hashed_password)
 
     s.add(new_user)
     s.commit()
     flash("Account created!")
-    return home()
+    return redirect(url_for('home'))
 
 
 @app.route('/login', methods=['POST'])
@@ -72,19 +71,19 @@ def do_admin_login():
     post_password = str(request.form['password'])
     
     s = db.session
-    query = s.query(User).filter(User.username.in_([post_username]))
+    query = s.query(User).filter(User.username == post_username)
     result = query.first()
-    success = check_password_hash(result.secret,post_password)
 
-
-    if success:
+    if result and check_password_hash(result.secret, post_password):
         session['logged_in'] = True
+
     else:
-        flash('wrong password!')
-    return home()
+        flash("Incorrect username or password!")
+    return redirect(url_for('home'))
 
 
 @app.route("/logout")
 def logout():
     session['logged_in'] = False
-    return home()
+    return redirect(url_for('home'))
+
