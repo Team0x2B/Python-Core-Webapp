@@ -1,5 +1,7 @@
-from flask import flash, render_template, request, session
+from flask import flash, render_template, request, session, jsonify
 import datetime
+import os,logging,sys,json, collections
+
 from studi.user import User
 from studi import app, db
 
@@ -9,6 +11,41 @@ def before_request():
     session.permanent = True
     app.permanent_session_lifetime = datetime.timedelta(hours=2)
     session.modified = True
+
+
+@app.route('/api/getUsers')
+def get_users():
+        logging.debug("inside getUsers")
+        conn = db.session # connect to database
+        query = conn.execute("select * from users") # perform query
+        rows = query.cursor.fetchall() # get all results
+
+        # convert to JSON compatible format with keys matching columns
+        results = []
+        for row in rows:
+            d = collections.OrderedDict()
+            d['id'] = row[0]
+            d['username'] = row[1]
+            d['password'] = row[2]
+            d['study'] = row[3]
+            d['locationX'] = row[4]
+            d['locationY'] = row[5]
+            results.append(d)
+
+        return jsonify(results)
+
+
+@app.route('/api/saveUser/<int:id>',methods=['POST'])
+def save_user(id):
+    conn = db.session
+    logging.debug("Save API ID=" + str(id))
+    user = conn.query(User.id)
+    logging.debug(request.data);
+    data = json.loads(request.data)
+    user.study = data['study']
+    conn.commit()
+    logging.debug(data['study'])
+    return jsonify( {'status':'ok'})
 
 
 @app.route('/')
