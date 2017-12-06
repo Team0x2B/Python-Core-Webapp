@@ -39,7 +39,8 @@ class GroupMembership(db.Model):
     user_id = Column(db.Integer, ForeignKey("users.id"), primary_key=True)
     group_id = Column(db.Integer, ForeignKey("groups.id"), primary_key=True)
     role = Column(db.String)
-    user = relationship("User", backref='group', lazy=True)
+    user = relationship("User")
+    groups = relationship("StudyGroup")
 
     def __init__(self, user, role):
         self.user = user

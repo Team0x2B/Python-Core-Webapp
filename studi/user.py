@@ -11,6 +11,10 @@ class User(db.Model):
     id = Column(db.Integer, primary_key=True)
     username = Column(db.String)
     secret = Column(db.String)
+    groups = relationship("GroupMembership",
+                          cascade="save-update, merge, "
+                                  "delete, delete-orphan"
+                          )
 
     def __init__(self, username, secret):
         """"""
