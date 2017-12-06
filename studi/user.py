@@ -14,4 +14,3 @@ class User(db.Model):
         """"""
         self.username = username
         self.secret = secret
-
