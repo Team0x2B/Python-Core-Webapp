@@ -6,13 +6,17 @@ from studi.user import User
 from studi.studygroup import StudyGroup
 
 
-def handle_not_logged_in():
-    logging.debug('user not logged in - cannot create group')
+def error_status():
     return jsonify({'status': 'error'})
 
 
 def ok_status():
     return jsonify({'status': 'ok'})
+
+
+def handle_not_logged_in():
+    logging.debug('user not logged in - cannot create group')
+    return error_status()
 
 
 @app.route('/api/getUsers')
@@ -33,22 +37,43 @@ def get_users():
         return jsonify(results)
 
 
-@app.route('/api/join_group/<int:group_id>', methods=['POST'])
+@app.route('/api/join_group/<int:group_id>', methods=['GET', 'POST'])
 def add_to_group(group_id):
     if not session.get('logged_in'):
         return handle_not_logged_in()
-    print("doing join")
     s = db.session
     groups_query = s.query(StudyGroup).filter(StudyGroup.id == group_id)
     user_query = s.query(User).filter(User.id == session['user_id'])
 
     group = groups_query.first()
     if not group:
-        return 501
+        return error_status()
     user = user_query.first()
+    if user.group:
+        print(user.group[0].group)
+        return error_status()
 
     group.add_member(user, "NORMAL")
 
+    s.commit()
+    return ok_status()
+
+
+@app.route('/api/delete_group/<int:group_id>')
+def delete_group(group_id):
+    if not session.get('logged_in'):
+        return handle_not_logged_in()
+    s = db.session
+
+    query = s.query(StudyGroup).filter(StudyGroup.id == group_id)
+    group = query.first()
+
+    if not any([m.user.id == session['user_id'] for m in group.members if m.role == "OWNER"]):
+        print("user not owner")
+        return error_status()
+    if not group:
+        return error_status()
+    s.delete(group)
     s.commit()
     return ok_status()
 
