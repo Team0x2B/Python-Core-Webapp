@@ -1,13 +1,18 @@
-from flask import flash, render_template, request, session, jsonify
+from flask import flash, render_template, request, session, redirect, url_for, jsonify
 from werkzeug.security import generate_password_hash,check_password_hash
 import datetime
-import os,logging,sys,json, collections
-from studi.user import User
+import logging, json, collections
 from studi import app, db
+from studi.user import User
 
 
 @app.before_request
 def before_request():
+    if not app.debug and request.url.startswith('http://'):
+        url = request.url.replace('http://', 'https://', 1)
+        return redirect(url, code=301)
+    elif app.debug:
+        print("Not forcing https because app.debug is set")
     session.permanent = True
     app.permanent_session_lifetime = datetime.timedelta(hours=2)
     session.modified = True
@@ -17,35 +22,31 @@ def before_request():
 def get_users():
         logging.debug("inside getUsers")
         conn = db.session # connect to database
-        query = conn.execute("select * from users") # perform query
-        rows = query.cursor.fetchall() # get all results
+        query = conn.query(User)
+        users = query.all()  # get all results
 
         # convert to JSON compatible format with keys matching columns
         results = []
-        for row in rows:
+        for u in users:
             d = collections.OrderedDict()
-            d['id'] = row[0]
-            d['username'] = row[1]
-            d['password'] = row[2]
-            d['study'] = row[3]
-            d['locationX'] = row[4]
-            d['locationY'] = row[5]
+            d['id'] = u.id
+            d['username'] = u.username
             results.append(d)
 
         return jsonify(results)
 
 
-@app.route('/api/saveUser/<int:id>',methods=['POST'])
-def save_user(id):
+@app.route('/api/saveUser/<int:id>', methods=['POST'])
+def save_user(user_id):
     conn = db.session
-    logging.debug("Save API ID=" + str(id))
-    user = conn.query(User.id)
-    logging.debug(request.data);
+    logging.debug("Save API ID=" + str(user_id))
+    user = conn.query(User.id == user_id)
+    logging.debug(request.data)
     data = json.loads(request.data)
     user.study = data['study']
     conn.commit()
     logging.debug(data['study'])
-    return jsonify( {'status':'ok'})
+    return jsonify({'status': 'ok'})
 
 
 @app.route('/')
@@ -64,7 +65,7 @@ def nearby():
 @app.route('/create')
 def create():
     if session.get('logged_in'):
-        return home()
+        return redirect(url_for('home'))
     return render_template("createAccount.html")
 
 
@@ -76,29 +77,26 @@ def do_create_account():
 
     if len(username) == 0 or len(password) == 0 or len(confirm_password) == 0:
         flash("You must complete all fields!")
-        return create()
+        return redirect(url_for('create'))
 
     if password != confirm_password:
         flash("Passwords didn't match!")
-        return create()
+        return redirect(url_for('create'))
 
     s = db.session
     query = s.query(User).filter(User.username.in_([username]))
     result = query.first()
     if result is not None:
         flash("Username: '{}' is already in use!".format(username))
-        return create()
+        return redirect(url_for('create'))
 
-
-    hashed_password = generate_password_hash(password,method = 'sha256',salt_length = 32)
-
-    new_user = User(username, hashed_password, "", 0, 0)
-
+    hashed_password = generate_password_hash(password, method='sha256', salt_length=32)
+    new_user = User(username, hashed_password)
 
     s.add(new_user)
     s.commit()
     flash("Account created!")
-    return home()
+    return redirect(url_for('home'))
 
 
 @app.route('/login', methods=['POST'])
@@ -108,19 +106,17 @@ def do_admin_login():
     post_password = str(request.form['password'])
     
     s = db.session
-    query = s.query(User).filter(User.username.in_([post_username]))
+    query = s.query(User).filter(User.username == post_username)
     result = query.first()
-    success = check_password_hash(result.secret,post_password)
 
-
-    if success:
+    if result and check_password_hash(result.secret, post_password):
         session['logged_in'] = True
     else:
-        flash('wrong password!')
-    return home()
+        flash("Incorrect username or password!")
+    return redirect(url_for('home'))
 
 
 @app.route("/logout")
 def logout():
     session['logged_in'] = False
-    return home()
+    return redirect(url_for('home'))
