@@ -9,6 +9,9 @@ from studi.user import User
 
 @app.before_request
 def before_request():
+    if not app.debug and request.url.startswith('http://'):
+        url = request.url.replace('http://', 'https://', 1)
+        return redirect(url, code=301)
     session.permanent = True
     app.permanent_session_lifetime = datetime.timedelta(hours=2)
     session.modified = True
