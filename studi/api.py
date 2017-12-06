@@ -53,16 +53,15 @@ def get_study_groups():
 @app.route('/api/create_study_group', methods=['POST'])
 def create_study_group():
     if not session.get('logged_in'):
-        print('user not logged in - cannot create group')
+        logging.debug('user not logged in - cannot create group')
         return jsonify({'status': 'error'})
     s = db.session
     query = s.query(User).filter(User.id == session['user_id'])
     user = query.first()
-    print(request.data)
     data = json.loads(request.data)
     new_group = StudyGroup(data['topic'], data['lat'], data['lon'], datetime.datetime.now())
     new_group.add_member(user, "OWNER")
-    print('created study group')
+    logging.debug('created study group')
 
     s.add(new_group)
     s.commit()

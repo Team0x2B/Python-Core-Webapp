@@ -49,12 +49,22 @@ function setTopic() {
           topicval = 'none';
       }
 
-      post_data = '{ "topic": "topicval", "lat": 0.0, "lon": 0.0}'
+      var post_data = {
+        "topic": topicval,
+        "lat": 0.0,
+        "lon": 0.0
+       }'
 
       console.log("topicval" + topicval)
       console.log("data:" + post_data);
 
       http_url = window.location.origin + '/api/create_study_group';
 
-      $.ajax( {url: http_url, xhrFields: {withCredentials: true}, type: "POST", contentType: "application/json", data:post_data });
+      $.ajax({
+        url: http_url,
+        xhrFields: {withCredentials: true},
+        type: "POST",
+        contentType: "application/json",
+        data:JSON.stringify(post_data)
+      });
 }
