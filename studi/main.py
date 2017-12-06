@@ -86,4 +86,3 @@ def do_admin_login():
 def logout():
     session['logged_in'] = False
     return redirect(url_for('home'))
-
