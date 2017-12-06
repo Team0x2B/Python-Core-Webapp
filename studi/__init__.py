@@ -15,6 +15,3 @@ from studi import user, studygroup  # import all ORM objects here
 db.create_all()
 
 import studi.main  # import all views here
-
-
-
