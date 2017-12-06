@@ -2,7 +2,7 @@ from flask import flash, render_template, request, session, jsonify
 from werkzeug.security import generate_password_hash,check_password_hash
 import datetime
 import os,logging,sys,json, collections
-
+from tabledef import *
 from studi.user import User
 from studi import app, db
 
