@@ -6,6 +6,15 @@ from studi.user import User
 from studi.studygroup import StudyGroup
 
 
+def handle_not_logged_in():
+    logging.debug('user not logged in - cannot create group')
+    return jsonify({'status': 'error'})
+
+
+def ok_status():
+    return jsonify({'status': 'ok'})
+
+
 @app.route('/api/getUsers')
 def get_users():
         logging.debug("inside getUsers")
@@ -24,6 +33,26 @@ def get_users():
         return jsonify(results)
 
 
+@app.route('/api/join_group/<int:group_id>', methods=['POST'])
+def add_to_group(group_id):
+    if not session.get('logged_in'):
+        return handle_not_logged_in()
+    print("doing join")
+    s = db.session
+    groups_query = s.query(StudyGroup).filter(StudyGroup.id == group_id)
+    user_query = s.query(User).filter(User.id == session['user_id'])
+
+    group = groups_query.first()
+    if not group:
+        return 501
+    user = user_query.first()
+
+    group.add_member(user, "NORMAL")
+
+    s.commit()
+    return ok_status()
+
+
 @app.route('/api/get_study_groups', methods=['GET'])
 def get_study_groups():
     s = db.session
@@ -33,6 +62,7 @@ def get_study_groups():
     results = []
     for group in groups:
         d = dict()
+        d["id"] = group.id
         d["topic"] = group.topic
         d['latitude'] = group.latitude
         d['longitude'] = group.longitude
@@ -53,8 +83,7 @@ def get_study_groups():
 @app.route('/api/create_study_group', methods=['POST'])
 def create_study_group():
     if not session.get('logged_in'):
-        logging.debug('user not logged in - cannot create group')
-        return jsonify({'status': 'error'})
+        return handle_not_logged_in()
     s = db.session
     query = s.query(User).filter(User.id == session['user_id'])
     user = query.first()
@@ -66,4 +95,4 @@ def create_study_group():
     s.add(new_group)
     s.commit()
 
-    return jsonify({'status': 'ok'})
+    return ok_status()
