@@ -79,7 +79,6 @@ def do_admin_login():
 
     if result and check_password_hash(result.secret, post_password):
         session['logged_in'] = True
-
     else:
         flash("Incorrect username or password!")
     return redirect(url_for('home'))
