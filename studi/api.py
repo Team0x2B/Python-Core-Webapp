@@ -39,7 +39,7 @@ def get_users():
         return jsonify(results)
 
 
-@app.route('/api/join_group/<int:group_id>', methods=['GET', 'POST'])
+@app.route('/api/join_group/<int:group_id>', methods=['POST'])
 def add_to_group(group_id):
     if not session.get('logged_in'):
         return handle_not_logged_in()
@@ -61,7 +61,7 @@ def add_to_group(group_id):
     return ok_status()
 
 
-@app.route('/api/delete_group/<int:group_id>')
+@app.route('/api/delete_group/<int:group_id>', methods=['POST'])
 def delete_group(group_id):
     if not session.get('logged_in'):
         return handle_not_logged_in()
