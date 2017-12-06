@@ -1,4 +1,5 @@
 from sqlalchemy import Column
+from json import JSONEncoder
 from studi import db
 
 

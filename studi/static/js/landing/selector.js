@@ -3,25 +3,24 @@ var curUser;
 var curStudy;
 var curLocationX;
 var curLocationY;
-function pageInit()
-{
+
+function pageInit() {
       // current user data
-      curid = '{{ session['id'] }}';
-      curUser =  '{{ session['username'] }}';
-      curStudy = '{{ session['study'] }}';
-      curLocationX = '{{ session['locationX'] }}';
-      curLocationY = '{{ session['locationY'] }}';
-      console.log("ID:" + curid);
-      console.log ("Current user: " + curUser);
-      //display username on screen
-      document.getElementById("curname").innerHTML = curUser;
-      console.log ("Current study: " + curStudy);
-      studybtn = document.getElementById(curStudy);
-      studybtn.checked = true;
+//      curid = '{{ session['id'] }}';
+//      curUser =  '{{ session['username'] }}';
+//      curStudy = '{{ session['study'] }}';
+//      curLocationX = '{{ session['locationX'] }}';
+//      curLocationY = '{{ session['locationY'] }}';
+//      console.log("ID:" + curid);
+//      console.log ("Current user: " + curUser);
+//      //display username on screen
+//      document.getElementById("curname").innerHTML = curUser;
+//      console.log ("Current study: " + curStudy);
+//      studybtn = document.getElementById(curStudy);
+//      studybtn.checked = true;
 }
 //arts, humn, engr, math, nats, soci
-function setTopic()
-{
+function setTopic() {
       if (document.getElementById('arts').checked) {
         topicval = 'arts';
       }
@@ -49,11 +48,13 @@ function setTopic()
       {
           topicval = 'none';
       }
-      console.log("topicval" + topicval)
-      postdata = '{"study":"'+topicval+'"}';
-      console.log("setTopic-ID:" + curid);
-      console.log("data:" + postdata);
-      myurl="https://localhost:4000/api/saveUser/"+curid;
 
-      $.ajax( {url: myurl, type: "POST", contentType: "application/json", data:postdata });
+      post_data = '{ "topic": "topicval", "lat": 0.0, "lon": 0.0}'
+
+      console.log("topicval" + topicval)
+      console.log("data:" + post_data);
+
+      http_url = window.location.origin + '/api/create_study_group';
+
+      $.ajax( {url: http_url, xhrFields: {withCredentials: true}, type: "POST", contentType: "application/json", data:post_data });
 }
