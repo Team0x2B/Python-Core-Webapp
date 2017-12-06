@@ -53,7 +53,7 @@ function setTopic() {
         "topic": topicval,
         "lat": 0.0,
         "lon": 0.0
-       }'
+       }
 
       console.log("topicval" + topicval)
       console.log("data:" + post_data);
