@@ -18,7 +18,7 @@
     overflow: hidden;
     background-color: #fff;
     top: 1%;
-    height: 6%;
+    height: 3em;
     z-index: 1;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
 }
@@ -31,7 +31,6 @@
         position: absolute;
         top: 1%;
         width: 500px;
-        height: 3em;
     }
 }
 
