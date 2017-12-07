@@ -2,7 +2,11 @@
     margin: 0;
 }
 body {
-  max-width: 600px;
+    max-width: 800px;
+    position: relative;
+    height: 100vh;
+}
+fixed-elements {
   position: relative;  /* <- make relative */
 }
 #map {
@@ -18,7 +22,6 @@ body {
     width: 100%
 }
 
-
 .navbar {
     overflow: hidden;
     background-color: #333;
@@ -26,17 +29,10 @@ body {
     position: absolute;
     top: 1%;
     width: 90%;
-    max-width: 500px;
+    max-width: 25hv;
     height: 6%;
     z-index: 1;
 }
-
-@media screen and (min-width: 500px) {
-   .my_class {
-      margin: margin: 0 0 0 0;
-   }
-}
-
 
 /* Links inside the navbar */
 .navbar div {
