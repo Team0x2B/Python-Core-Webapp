@@ -2,8 +2,8 @@
     margin: 0;
 }
 body {
-    max-width: 600px;
     position: relative;
+    max-width: 14cm;
     height: 100vh;
 }
 fixed-elements {
@@ -29,7 +29,6 @@ fixed-elements {
     position: absolute;
     top: 1%;
     width: 90%;
-    max-width: 56hv;
     height: 6%;
     z-index: 1;
 }
