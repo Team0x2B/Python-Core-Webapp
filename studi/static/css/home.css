@@ -1,6 +1,10 @@
 *,html {
     margin: 0;
 }
+body {
+  max-width: 600px;
+  position: relative;  /* <- make relative */
+}
 #map {
     position: absolute;
     top: 0vh;
@@ -13,16 +17,26 @@
     height: 90vh;
     width: 100%
 }
+
+
 .navbar {
     overflow: hidden;
     background-color: #333;
-    margin: 0 15% 0 15%;
+    margin: 0 5% 0 5%;
     position: absolute;
-    top: 4%;
-    width: 70%;
+    top: 1%;
+    width: 90%;
+    max-width: 500px;
     height: 6%;
     z-index: 1;
 }
+
+@media screen and (min-width: 500px) {
+   .my_class {
+      margin: margin: 0 0 0 0;
+   }
+}
+
 
 /* Links inside the navbar */
 .navbar div {
