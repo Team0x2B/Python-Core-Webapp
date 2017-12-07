@@ -8,19 +8,21 @@ var marker;
 var data;
 function initMap() {
     navigator.geolocation.getCurrentPosition(function(position){
+        console.log("entered init map")
         pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         map = new google.maps.Map(document.getElementById('map'),{center: pos,zoom: 16});
 
         infoWindow = new google.maps.Marker({position: pos,map: map,title:"You Are Here"});
         infoWindow.setMap(map);
 
-        $.getJSON( "api/getUsers", function( data ){
+        $.getJSON( "api/get_study_groups", function( data ){
             $.each( data, function( key, val ){
             //console.log(data);
-            console.log(val.username+":"+val.locationX+","+val.locationY+" "+val.study);
-            pos = new google.maps.LatLng(val.locationX,val.locationY);
-            marker = new google.maps.Marker({position: pos,map: map,label: key.toString(), title: val.username, style: {fill: '#76c043'} });
-                google.maps.event.addListener(marker,'click', (function(marker,key){
+            console.log(val.id+":"+val.latitude+","+val.longitude+" "+val.topic);
+            console.log("current location: " + position.coords.latitude + ", " + position.coords.longitude)
+            pos = new google.maps.LatLng(val.latitude,val.longitude);
+            marker = new google.maps.Marker({position: pos,map: map,label: "study-group", title: val.subject, style: {fill: '#76c043'} });
+            google.maps.event.addListener(marker,'click', (function(marker,key){
                 return function() {
                     console.log("marker clicked");
                     //console.log(marker.get('map'));
@@ -33,6 +35,8 @@ function initMap() {
                 marker.setMap(map);
             });
         });
-    }); // end getCurrentPosition
+    }, function error (msg) {
+        alter("geolocation error!")
+    }, {maximumAge:600000, timeout:5000, enableHighAccuracy: true}); // end getCurrentPosition
     console.log("hello");
 };
