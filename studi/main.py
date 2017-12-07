@@ -30,6 +30,11 @@ def nearby():
     return "This section isn't up and running yet, check back soon!"
 
 
+@app.route('/home')
+def main_map():
+    return render_template("main_page.html")
+
+
 @app.route('/create')
 def create():
     if session.get('logged_in'):
