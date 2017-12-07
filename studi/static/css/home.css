@@ -3,10 +3,11 @@
 }
 #map {
     position: absolute;
-    top: 6vh;
+    top: 0vh;
     bottom: 0;
-    width: 98vw;
-    margin: 1vh 1vw 1vh 1vw;
+    width: 100vw;
+    margin: 0 0 0 0;
+    z-index: 0;
 }
 #container {
     height: 90vh;
@@ -14,11 +15,13 @@
 }
 .navbar {
     overflow: hidden;
-    background-color: #dcdfe5;
-    position: fixed;
-    top: 0;
-    width: 100%;
+    background-color: #333;
+    margin: 0 15% 0 15%;
+    position: absolute;
+    top: 4%;
+    width: 70%;
     height: 6%;
+    z-index: 1;
 }
 
 /* Links inside the navbar */
@@ -31,4 +34,21 @@
     text-decoration: none;
     font-size: 17px;
     vertical-align: middle;
+    z-index: 3;
+}
+
+#left-menu {
+    width: 33%;
+    float: left;
+}
+
+#search-bar {
+    width: 34%;
+    display: inline-block;
+    float: left;
+}
+
+#right-menu {
+    width: 33%;
+    float: right;
 }
