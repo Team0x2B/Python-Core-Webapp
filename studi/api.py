@@ -6,6 +6,7 @@ import collections
 from studi import app, db
 from studi.user import User
 from studi.studygroup import StudyGroup
+import requests
 
 
 def error_status():
@@ -19,6 +20,11 @@ def ok_status():
 def handle_not_logged_in():
     logging.debug('user not logged in - cannot create group')
     return error_status()
+
+
+@app.route('/extern/api/googlemaps')
+def get_maps_data():
+    return requests.get("https://maps.googleapis.com/maps/api/js?key=AIzaSyBjznhok9lVS9qwe2DzQmJXg9TA2Ye2qkk&callback=initMap").content
 
 
 @app.route('/api/getUsers')
