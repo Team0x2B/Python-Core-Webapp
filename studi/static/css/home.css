@@ -18,7 +18,8 @@
     overflow: hidden;
     background-color: #fff;
     top: 1%;
-    height: 3em;
+    height: 2em;
+    vertical-align: middle;
     z-index: 1;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
 }
@@ -50,17 +51,26 @@
     float: left;
     display: block;
     color: #a9a9a9;
-    text-align: center;
+    text-align: left;
     height: 100%;
     text-decoration: none;
     font-size: 17px;
-    vertical-align: middle;
+    line-height: 34px;
     z-index: 3;
 }
 
 #left-menu {
-    width: 33%;
     float: left;
+    padding-right: 5%;
+}
+
+#left-menu img {
+    /*menu icon image*/
+    padding-bottom: 7.5%;
+    padding-left: 7.5%;
+    vertical-align: middle;
+    max-height: 85%;
+    opacity: 0.5;
 }
 
 #search-bar {
