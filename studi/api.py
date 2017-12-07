@@ -29,20 +29,20 @@ def get_maps_data():
 
 @app.route('/api/getUsers')
 def get_users():
-        logging.debug("inside getUsers")
-        conn = db.session  # connect to database
-        query = conn.query(User)
-        users = query.all()  # get all results
+    logging.debug("inside getUsers")
+    conn = db.session  # connect to database
+    query = conn.query(User)
+    users = query.all()  # get all results
 
-        # convert to JSON compatible format with keys matching columns
-        results = []
-        for u in users:
-            d = collections.OrderedDict()
-            d['id'] = u.id
-            d['username'] = u.username
-            results.append(d)
+    # convert to JSON compatible format with keys matching columns
+    results = []
+    for u in users:
+        d = collections.OrderedDict()
+        d['id'] = u.id
+        d['username'] = u.username
+        results.append(d)
 
-        return jsonify(results)
+    return jsonify(results)
 
 
 @app.route('/api/join_group/<int:group_id>', methods=['POST'])
