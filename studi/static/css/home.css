@@ -2,12 +2,12 @@
     margin: 0;
 }
 body {
-    max-width: 800px;
+    max-width: 600px;
     position: relative;
     height: 100vh;
 }
 fixed-elements {
-  position: relative;  /* <- make relative */
+  max-width: relative;  /* <- make relative */
 }
 #map {
     position: absolute;
@@ -29,7 +29,7 @@ fixed-elements {
     position: absolute;
     top: 1%;
     width: 90%;
-    max-width: 25hv;
+    max-width: 56hv;
     height: 6%;
     z-index: 1;
 }
