@@ -1,4 +1,7 @@
+sqlalchemy
+werkzeug
 Flask==0.12.2
 Flask-SQLAlchemy==2.3.2
 gunicorn==19.7.1
 psycopg2
+requests

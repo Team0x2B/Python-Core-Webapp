@@ -15,6 +15,9 @@
 		<!--<script src="../static/php/database.php"/></script>-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="../static/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="../static/css/ie9.css" /><![endif]-->
+        <script src="../static/js/landing/selector.js"></script>
+        <script src="../static/js/landing/map.js"></script>
+
 
   <style>
   #map {
@@ -24,67 +27,6 @@
   }
   </style>
 
-      <script>
-    var curid;
-    var curUser;
-    var curStudy;
-    var curLocationX;
-    var curLocationY;
-    function pageInit()
-    {
-      // current user data
-      curid = '{{ session['id'] }}';
-      curUser =  '{{ session['username'] }}';
-      curStudy = '{{ session['study'] }}';
-      curLocationX = '{{ session['locationX'] }}';
-      curLocationY = '{{ session['locationY'] }}';
-      console.log("ID:" + curid);
-      console.log ("Current user: " + curUser);
-      //display username on screen
-      document.getElementById("curname").innerHTML = curUser;
-      console.log ("Current study: " + curStudy);
-      studybtn = document.getElementById(curStudy);
-      studybtn.checked = true;
-    }
-//arts, humn, engr, math, nats, soci
-    function setTopic()
-    {
-      if (document.getElementById('arts').checked) {
-        topicval = 'arts';
-      }
-      else if (document.getElementById('humn').checked)
-      {
-        topicval = 'humn';
-      }
-	  else if (document.getElementById('engr').checked)
-      {
-        topicval = 'engr';
-      }
-	  else if (document.getElementById('math').checked)
-      {
-        topicval = 'math';
-      }
-	  else if (document.getElementById('nats').checked)
-      {
-        topicval = 'nats';
-      }
-	  else if (document.getElementById('soci').checked)
-      {
-        topicval = 'soci';
-      }
-	  else
-	  {
-		  topicval = 'none';
-	  }
-	  console.log("topicval" + topicval)
-      postdata = '{"study":"'+topicval+'"}';
-      console.log("setTopic-ID:" + curid);
-      console.log("data:" + postdata);
-      myurl="https://localhost:4000/api/saveUser/"+curid;
-
-      $.ajax( {url: myurl, type: "POST", contentType: "application/json", data:postdata });
-    }
-  </script>
 
 
 	</head>
@@ -131,7 +73,7 @@
 			</form>
 		</section>
 
-		<!-- Two -->
+        <!-- Two -->
 		<section id="two" class="wrapper">
 			<div class="inner alt">
 				<section class="spotlight">
@@ -139,85 +81,8 @@
 						<h3>Where are you studying today?</h3>
 						<div id="map">
 						</div>
-						<!--Google JavaScriptAPIkey = AIzaSyCuH8mkgSnqAfX_YswOM4HcLZ5FjnP771A -->
-						<!--GoogleApiKey = AIzaSyDlUUQR0oTKJJX1MCwVKBDj3OTWTExUHvY-->
 
-<script>
-      // Note: This example requires that you consent to location sharing when
-      // prompted by your browser. If you see the error "The Geolocation service
-      // failed.", it means you probably did not give permission for the browser to
-      // locate you.
-var map, infoWindow;
-var pos;
-var marker;
-var data;
-function initMap()
-{
-  navigator.geolocation.getCurrentPosition(function(position){
-	  pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-	  map = new google.maps.Map(document.getElementById('map'),{center: pos,zoom: 16});
-    /*
-    var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch({location: new google.maps.LatLng(40.008836, -105.270801), radius: '100', type: ['university']}, function(results, status){  if (status == google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length; i++) {
-      var place = results[i];
-      console.log(results[i]);
-    }
-    console.log("You are at: " + results[0].name);  // best result
-  } });
-*/
-    // marker for current user
-	  infoWindow = new google.maps.Marker({position: pos,map: map,title:"You Are Here"});
-   	  infoWindow.setMap(map);
-            var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-            '<div id="bodyContent">'+
-            '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-            'sandstone rock formation in the southern part of the '+
-            'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-            'south west of the nearest large town, Alice Springs; 450&#160;km '+
-            '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-            'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-            'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-            'Aboriginal people of the area. It has many springs, waterholes, '+
-            'rock caves and ancient paintings. Uluru is listed as a World '+
-            'Heritage Site.</p>'+
-            '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-            'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-            '(last visited June 22, 2009).</p>'+
-            '</div>'+
-            '</div>';
-        //var mywindow = new google.maps.InfoWindow({
-        //  content: contentString
-        //});
-//https://stackoverflow.com/questions/15531390/adding-array-of-markers-in-google-map
-    // Add marker for each user
-	  $.getJSON( "api/getUsers", function( data ){
-    $.each( data, function( key, val ){
-        //console.log(data);
-        console.log(val.username+":"+val.locationX+","+val.locationY+" "+val.study);
-        pos = new google.maps.LatLng(val.locationX,val.locationY);
-        marker = new google.maps.Marker({position: pos,map: map,label: key.toString(), title: val.username, style: {fill: '#76c043'} });
-       google.maps.event.addListener(marker,'click', (function(marker,key){
-          return function() {
-          console.log("marker clicked");
-          //console.log(marker.get('map'));
-          console.log(key);
-          console.log(data[key]);
-          //console.log('clicked:'+marker.title);
-          //mywindow.open(marker.get('map'),marker);
-          }} )(marker,key) );
-        //infoWindow.open(map);
-        marker.setMap(map);
-        });
-  });
-	}); // end getCurrentPosition
-  console.log("hello");
-};
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjznhok9lVS9qwe2DzQmJXg9TA2Ye2qkk&callback=initMap"
+<script src="../extern/api/googlemaps"
     async defer></script>
 
 
