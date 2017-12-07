@@ -17,10 +17,7 @@
 .navbar {
     overflow: hidden;
     background-color: #fff;
-    margin: 0 5% 0 5%;
-    position: absolute;
     top: 1%;
-    width: 90%;
     height: 6%;
     z-index: 1;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
@@ -30,25 +27,25 @@
 @media only screen and (min-width: 768px) {
     /* tablets and desktop */
     .navbar {
-        overflow: hidden;
-        background-color: #fff;
         margin-left: 5px;
         position: absolute;
         top: 1%;
         width: 500px;
         height: 6%;
-        z-index: 1;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
     }
 }
 
 @media only screen and (max-width: 767px) {
     /* phones */
+    .navbar {
+        margin: 0 5% 0 5%;
+        position: absolute;
+        top: 1%;
+        width: 90%;
+        height: 6%;
+    }
 }
 
-@media only screen and (max-width: 767px) and (orientation: portrait) {
-    /* portrait phones */
-}
 
 /* Links inside the navbar */
 .navbar div {
