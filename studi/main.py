@@ -30,6 +30,8 @@ def redirect_old():
 @app.route('/create_group')
 def create_group():
     if not session.get('logged_in'):
+        session['redirect-target'] = url_for('create_group')
+        print("Set redirect target: {}".format(session['redirect-target']))
         return render_template('login.html')
     else:
         return render_template("landing.html")
@@ -74,7 +76,8 @@ def do_create_account():
     s.add(new_user)
     s.commit()
     flash("Account created!")
-    return redirect(url_for('home'))
+    return redirect(url_for('do_admin_login'))
+
 
 
 @app.route('/login', methods=['POST'])
@@ -92,7 +95,11 @@ def do_admin_login():
         session['user_id'] = result.id
     else:
         flash("Incorrect username or password!")
-    return redirect(url_for('home'))
+    if session.get('redirect-target'):
+        print("redirect to {}".format(session['redirect-target']))
+        return redirect(session['redirect-target'])
+    else:
+        return redirect(url_for('home'))
 
 
 @app.route("/logout")
