@@ -1,9 +1,35 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoic3BhY2VtYW4xNzAxIiwiYSI6ImNqYXk5aDJ4ZjE1bmMyd21rNjh0cnY4NnEifQ.oGvBAyBD4Az0Ij9o2ThX9A';
 map_pin_url = '../static/css/images/pin.svg';
 
-
+var geolocation_failed = false;
 var map;
-navigator.geolocation.getCurrentPosition(function(position){
+
+initGeolocation();
+
+function initGeolocation() {
+    navigator.geolocation.getCurrentPosition(function(position){
+        onLocationFound(position);
+    }, function error (msg) {
+        console.log("geolocation error");
+        onHighAccuracyError();
+    }, {maximumAge:600000, timeout:5000, enableHighAccuracy: true});
+}
+
+function onHighAccuracyError() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        console.log("using fallback geolocation")
+        onLocationFound(position);
+    }, function error (err) {
+        if (!geolocation_failed) {
+            console.log("fallback geolocation error");
+            alert("fallback geolocation error: " + err.message + " code: " + err.code);
+            geolocation_failed = true;
+        }
+    }, {maximumAge:600000, timeout:5000});
+}
+
+
+function onLocationFound(position) {
     console.log("centering map");
     map = new mapboxgl.Map({
         container: 'map',
@@ -15,10 +41,7 @@ navigator.geolocation.getCurrentPosition(function(position){
 
     map.on('load', onMapLoad);
     map.on('click', onMapClick);
-
-}, function error (msg) {
-    console.log("geolocation error");
-});
+}
 
 function onMapLoad(event) {
     document.getElementById("loading-info").style.display = "none";
