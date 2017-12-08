@@ -4,8 +4,6 @@ var marker;
 var data;
 function initMap() {
 
-
-
     navigator.geolocation.getCurrentPosition(function(position){
         console.log("entered init map")
         pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);

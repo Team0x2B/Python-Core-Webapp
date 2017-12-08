@@ -1,10 +1,12 @@
 
 function openSidebar() {
     document.getElementById("main-sidebar-menu").style.width = "250px";
+    document.getElementById("opaque").style.display = "block"
 }
 
 function closeSidebar() {
     document.getElementById("main-sidebar-menu").style.width = "0";
+    document.getElementById("opaque").style.display = "none"
 }
 
 function hideInfoWindow() {
