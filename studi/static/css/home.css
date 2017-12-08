@@ -197,11 +197,9 @@
 }
 
 .mapboxgl-marker{
-    fill: red;
-    cursor: position;
-    display: block;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    padding: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #ff8280;
+  border: 3px solid white;
+  border-radius: 50%;
 }

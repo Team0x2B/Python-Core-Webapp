@@ -33,9 +33,9 @@ function onLocationFound(position) {
     console.log("centering map");
     map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v10',
+        style: 'mapbox://styles/spaceman1701/cjayjd8wa1m8m2tn2wgkp7o7q',
         pitchWithRotate: false,
-        zoom: 16,
+        zoom: 15.1,
         center: [position.coords.longitude, position.coords.latitude]
     });
 
@@ -50,11 +50,6 @@ function onMapLoad(event) {
             $.each( data, function( key, val ){
                 var el = document.createElement('div');
                 el.className = 'marker';
-                var img = document.createElement('img');
-                img.setAttribute("src", map_pin_url);
-                img.style.width = '40px';
-                img.style.height = '40px';
-                el.appendChild(img);
 
                 new mapboxgl.Marker(el)
                     .setLngLat([val.longitude, val.latitude])
