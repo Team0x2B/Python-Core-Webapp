@@ -20,11 +20,6 @@ def before_request():
 @app.route('/')
 def home():
     print(session.get("logged_in"))
-    return render_template("main_page.html")
-
-
-@app.route('/old')
-def old_home():
     return render_template("main_page_google.html")
 
 
