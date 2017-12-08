@@ -50,8 +50,8 @@ function initMap() {
                 marker.setMap(map);
             });
         });
-    }, function error (msg) {
-        alert("geolocation error: " + msg);
+    }, function error (err) {
+        alert("geolocation error: " + err.message + " code: " + err.code);
     }, {maximumAge:600000, timeout:5000, enableHighAccuracy: true}); // end getCurrentPosition
     console.log("hello");
 };
