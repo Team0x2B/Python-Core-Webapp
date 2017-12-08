@@ -24,7 +24,7 @@ def home():
 
 @app.route('/home')
 def redirect_old():
-    return render_template(url_for('home'), code=301)  # for cordova install
+    return redirect(url_for('home'), code=301)  # for cordova install
 
 
 @app.route('/create_group')
@@ -32,7 +32,7 @@ def create_group():
     if not session.get('logged_in'):
         session['redirect-target'] = url_for('create_group')
         print("Set redirect target: {}".format(session['redirect-target']))
-        return render_template('login.html')
+        return redirect(url_for('login'))
     else:
         return render_template("landing.html")
 
@@ -47,6 +47,13 @@ def create():
     if session.get('logged_in'):
         return redirect(url_for('home'))
     return render_template("createAccount.html")
+
+
+@app.route('/login')
+def login():
+    if session.get('logged_in'):
+        return redirect(url_for('home'))
+    return render_template('login.html')
 
 
 @app.route('/createAccount', methods=['POST'])
@@ -76,10 +83,10 @@ def do_create_account():
     s.add(new_user)
     s.commit()
     flash("Account created!")
-    return redirect(url_for('do_admin_login'))
+    return redirect(url_for('login'))
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/login_post', methods=['POST'])
 def do_admin_login():
          
     post_username = str(request.form['username'])
