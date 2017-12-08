@@ -1,6 +1,7 @@
 *,html {
     margin: 0;
 }
+
 #map {
     position: absolute;
     top: 0vh;
@@ -25,7 +26,7 @@
 }
 
 
-@media only screen and (min-width: 511px) {
+@media only screen and (min-width: 768px) {
     /* tablets and desktop */
     .navbar {
         margin-left: 10px;
@@ -35,7 +36,7 @@
     }
 }
 
-@media only screen and (max-width: 510px) {
+@media only screen and (max-width: 767px) {
     /* phones */
     .navbar {
         margin: 0 2.5% 0 2.5%;
