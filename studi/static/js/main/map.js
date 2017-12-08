@@ -24,7 +24,7 @@ function initMap() {
 
         map.addListener('dragstart', function(e) {
             console.log("drag start");
-            $("#menu-search-field").blur();
+            //$("#menu-search-field").blur();
         });
 
         infoWindow = new google.maps.Marker({position: pos,map: map,title:"You Are Here"});
