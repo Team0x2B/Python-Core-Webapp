@@ -22,18 +22,25 @@
     <div id="container">
         <div id="fixed-elements">
             <div id="top-bar" class="navbar">
-            <div id="left-menu">
-                <img src="../static/css/images/menu-icon.svg" alt="Menu" onclick="openSidebar()">
-            </div>
-            <div id="search-bar">
-                <div id="align-placeholder">
-                    <input type="text" id="menu-search-field" class="study-search" value="" placeholder="what do you want to study?" name="study-search">
+                <div id="left-menu">
+                    <img src="../static/css/images/menu-icon.svg" alt="Menu" onclick="openSidebar()">
+                </div>
+                <div id="search-bar">
+                    <div id="align-placeholder">
+                        <input type="text" id="menu-search-field" class="study-search" value="" placeholder="what do you want to study?" name="study-search">
+                    </div>
+                </div>
+                <div id="right-menu">
+
                 </div>
             </div>
-            <div id="right-menu">
-
+            <div id="info-window" class="info-window">
+                <p id="title">Group Topic</p>
+                <p id="specific">Group Specific Topic</p>
+                <p id="author">Group Owner</p>
+                <p id="count">Number of people</p>
+                <p id="info">Description</p>
             </div>
-        </div>
         </div>
 
         <div id="map"></div>
@@ -50,6 +57,11 @@
             <p>
                 Item 4
             </p>
+            {% if not session.logged_in %}
+                <a href="../login" class="login-button">Login or Create Account</a>
+            {% else %}
+                <a href="../logout" class="logout-button">Logout</a>
+            {% endif %}
         </div>
     </div>
 </body>
