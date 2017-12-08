@@ -17,7 +17,7 @@
 		<!--[if lte IE 9]><link rel="stylesheet" href="../static/css/ie9.css" /><![endif]-->
         <script src="../static/js/landing/selector.js"></script>
         <script src="../static/js/landing/map.js"></script>
-
+		<script src="../extern/api/googlemaps" async defer></script>
 
   <style>
   #map {
@@ -76,18 +76,13 @@
         <!-- Two -->
 		<section id="two" class="wrapper">
 			<div class="inner alt">
-				<section class="spotlight">
-					<div class="content">
+				<section class="spotlight" >
+					<div class="content" style="width:100%">
 						<h3>Where are you studying today?</h3>
 						<div id="map">
 						</div>
-
-<script src="../extern/api/googlemaps"
-    async defer></script>
-
-
-	</div>
-		</section>
+					</div>
+				</section>
 				<section class="spotlight">
 					<div class="content">
 						<ul class="actions">

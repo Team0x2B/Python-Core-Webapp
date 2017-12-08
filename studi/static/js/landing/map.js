@@ -10,7 +10,13 @@ function initMap() {
     navigator.geolocation.getCurrentPosition(function(position){
         console.log("entered init map")
         pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        map = new google.maps.Map(document.getElementById('map'),{center: pos,zoom: 16});
+        map = new google.maps.Map(document.getElementById('map'),
+            {
+                center: pos,
+                zoom: 16,
+                disableDefaultUI: true
+            }
+         );
 
         groupMarker = new google.maps.Marker({
             position: pos,

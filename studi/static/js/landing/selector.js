@@ -51,9 +51,9 @@ function setTopic() {
 
 
     var post_data = {
-    "topic": topicval,
-    "lat": groupMarker.getPosition().lat(),
-    "lon": groupMarker.getPosition().lng()
+        "topic": topicval,
+        "lat": groupMarker.getPosition().lat(),
+        "lon": groupMarker.getPosition().lng()
     }
 
     console.log("topicval" + topicval)
