@@ -57,7 +57,7 @@
     height: 100%;
     text-decoration: none;
     font-size: 24px;
-    z-index: 3;
+    z-index: 2;
     display: table;
 }
 
@@ -97,4 +97,34 @@
 #right-menu {
     width: 33%;
     float: right;
+}
+
+.sidebar-menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.3s;
+}
+
+.sidebar-menu * {
+    padding: 16px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar-menu .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
 }

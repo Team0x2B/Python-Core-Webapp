@@ -49,26 +49,23 @@ function setTopic() {
           topicval = 'none';
       }
 
-      navigator.geolocation.getCurrentPosition(function (position) {
-        console.log('geolocation found')
 
-        var post_data = {
-        "topic": topicval,
-        "lat": position.coords.latitude,
-        "lon": position.coords.longitude
-        }
+    var post_data = {
+    "topic": topicval,
+    "lat": groupMarker.getPosition().lat(),
+    "lon": groupMarker.getPosition().lng()
+    }
 
-        console.log("topicval" + topicval)
-        console.log("data:" + post_data);
+    console.log("topicval" + topicval)
+    console.log("data:" + post_data);
 
-        http_url = window.location.origin + '/api/create_study_group';
+    http_url = window.location.origin + '/api/create_study_group';
 
-        $.ajax({
-            url: http_url,
-            xhrFields: {withCredentials: true},
-            type: "POST",
-            contentType: "application/json",
-            data:JSON.stringify(post_data)
-        });
-      })
+    $.ajax({
+        url: http_url,
+        xhrFields: {withCredentials: true},
+        type: "POST",
+        contentType: "application/json",
+        data:JSON.stringify(post_data)
+    });
 }

@@ -14,6 +14,7 @@
     <script src="../static/js/skel.min.js"></script>
     <script src="../static/js/util.js"></script>
     <script src="../static/js/main.js"></script>
+    <script src="../static/js/main/nav.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 </head>
@@ -22,7 +23,7 @@
         <div id="fixed-elements">
             <div id="top-bar" class="navbar">
             <div id="left-menu">
-                <img src="../static/css/images/menu-icon.svg" alt="Menu">
+                <img src="../static/css/images/menu-icon.svg" alt="Menu" onclick="openSidebar()">
             </div>
             <div id="search-bar">
                 <div id="align-placeholder">
@@ -36,6 +37,20 @@
         </div>
 
         <div id="map"></div>
+
+        <div id="main-sidebar-menu" class="sidebar-menu">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">&times;</a>
+            <a href="../">Create Group</a>
+            <p>
+                Item 2
+            </p>
+            <p>
+                Item 3
+            </p>
+            <p>
+                Item 4
+            </p>
+        </div>
     </div>
 </body>
 </html>
