@@ -18,8 +18,13 @@ function initMap() {
          );
 
         map.addListener('click', function(e) {
-            console.log("map clicked")
-            $("#menu-search-field").blur()
+            console.log("map clicked");
+            $("#menu-search-field").blur();
+        });
+
+        map.addListener('dragstart', function(e) {
+            console.log("drag start");
+            $("#menu-search-field").blur();
         });
 
         infoWindow = new google.maps.Marker({position: pos,map: map,title:"You Are Here"});
