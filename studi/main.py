@@ -79,7 +79,6 @@ def do_create_account():
     return redirect(url_for('do_admin_login'))
 
 
-
 @app.route('/login', methods=['POST'])
 def do_admin_login():
          
