@@ -22,6 +22,11 @@ def home():
     return render_template("main_page.html")
 
 
+@app.route('/home')
+def redirect_old():
+    return render_template(url_for('home'), code=301)  # for cordova install
+
+
 @app.route('/create_group')
 def create_group():
     if not session.get('logged_in'):
