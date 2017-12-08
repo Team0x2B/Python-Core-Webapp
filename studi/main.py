@@ -19,6 +19,11 @@ def before_request():
 
 @app.route('/')
 def home():
+    return render_template("main_page.html")
+
+
+@app.route('/create_group')
+def create_group():
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
@@ -28,11 +33,6 @@ def home():
 @app.route('/nearby')
 def nearby():
     return "This section isn't up and running yet, check back soon!"
-
-
-@app.route('/home')
-def main_map():
-    return render_template("main_page.html")
 
 
 @app.route('/create')
