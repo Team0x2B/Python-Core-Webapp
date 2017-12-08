@@ -25,7 +25,7 @@ function onHighAccuracyError() {
             alert("fallback geolocation error: " + err.message + " code: " + err.code);
             geolocation_failed = true;
         }
-    }, {maximumAge:600000, timeout:5000});
+    }, {maximumAge:600000, timeout:5000, enableHighAccuracy: false});
 }
 
 

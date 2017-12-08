@@ -23,6 +23,11 @@ def home():
     return render_template("main_page.html")
 
 
+@app.route('/old')
+def old_home():
+    return render_template("main_page_google.html")
+
+
 @app.route('/home')
 def redirect_old():
     return redirect(url_for('home'), code=301)  # for cordova install
