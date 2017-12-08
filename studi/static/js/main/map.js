@@ -46,7 +46,7 @@ function initMap() {
             });
         });
     }, function error (msg) {
-        alter("geolocation error!")
+        alert("geolocation error!")
     }, {maximumAge:600000, timeout:5000, enableHighAccuracy: true}); // end getCurrentPosition
     console.log("hello");
 };
