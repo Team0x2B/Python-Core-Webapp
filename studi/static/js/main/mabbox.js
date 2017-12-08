@@ -9,7 +9,7 @@ navigator.geolocation.getCurrentPosition(function(position){
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v10',
         pitchWithRotate: false,
-        zoom: 15,
+        zoom: 16,
         center: [position.coords.longitude, position.coords.latitude]
     });
 
@@ -21,16 +21,16 @@ navigator.geolocation.getCurrentPosition(function(position){
 });
 
 function onMapLoad(event) {
+    document.getElementById("loading-info").style.display = "none";
     console.log("map loaded");
-    map.setLayerZoomRange('building', 0, 20);
     $.getJSON( "api/get_study_groups", function( data ){
             $.each( data, function( key, val ){
                 var el = document.createElement('div');
                 el.className = 'marker';
                 var img = document.createElement('img');
                 img.setAttribute("src", map_pin_url);
-                img.style.width = '35px';
-                img.style.height = '35px';
+                img.style.width = '40px';
+                img.style.height = '40px';
                 el.appendChild(img);
 
                 new mapboxgl.Marker(el)
