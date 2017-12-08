@@ -14,20 +14,33 @@ map.on('load', function(event) {
     }, function error (msg) {
         console.log("geolocation error");
     });
+    $.getJSON( "api/get_study_groups", function( data ){
+            $.each( data, function( key, val ){
+                var el = document.createElement('div');
+                el.className = 'marker';
+                el.style.backgroundImage = 'url(' + map_pin_url + ')';
+                el.style.width = '50' + 'px';
+                el.style.height = '50' + 'px';
+
+                new mapboxgl.Marker(el)
+                    .setLngLat([val.longitude, val.latitude])
+                    .addTo(map);
+
+                el.addEventListener('click', function() {
+                    onMarkerClick(key, data[key]);
+                });
+            });
+    });
 });
 
 map.on('click', function(event) {
     console.log("clicked");
     console.log(event);
 
-    var el = document.createElement('div');
-    el.className = 'marker';
-    el.style.backgroundImage = 'url(' + map_pin_url + ')';
-    el.style.width = '50' + 'px';
-    el.style.height = '50' + 'px';
 
-    // add marker to map
-    new mapboxgl.Marker(el)
-        .setLngLat(event.lngLat)
-        .addTo(map);
 });
+
+function onMarkerClick(key, group_data) {
+    console.log(group_data);
+    showInfoWindow(group_data.topic, "CSCI 3308", "Student", 1, "This is a description of what this study group is about.");
+}
