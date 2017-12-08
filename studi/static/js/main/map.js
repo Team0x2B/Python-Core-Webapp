@@ -16,7 +16,7 @@ function initMap() {
 
         map.addListener('click', function(e) {
             console.log("map clicked")
-            $("#map").focus()
+            $("#menu-search-field").blur()
         });
 
         infoWindow = new google.maps.Marker({position: pos,map: map,title:"You Are Here"});
