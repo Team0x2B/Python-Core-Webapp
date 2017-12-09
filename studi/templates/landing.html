@@ -9,15 +9,10 @@
 		<title> Studi</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="min-width=500px,width=device-width, initial-scale=1, maximum-scale=1" />
-		<!--[if lte IE 8]><script src="../static/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" type="text/css" href="../static/css/main.css?v=<?=time();?>" />
-		<!-- <script src="../static/js/backend.js"/> -->
-		<!--<script src="../static/php/database.php"/></script>-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="../static/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 9]><link rel="stylesheet" href="../static/css/ie9.css" /><![endif]-->
         <script src="../static/js/landing/selector.js"></script>
         <script src="../static/js/landing/map.js"></script>
-
+		<script src="../extern/api/googlemaps" async defer></script>
 
   <style>
   #map {
@@ -39,66 +34,70 @@
         <h1><a href="#">Welcome <div id=curname></div></a></h1>
 				<p>What would you like to Studi today?</p>
 				<ul class="actions">
-					<li><a href="#one" class="button special scrolly">Set Topic</a></li>
-					<li><a href="#two" class="button icon scrolly">Set Location</a></li>
+					<li><a href="#one" class="button special scrolly">Get Started</a></li>
 				</ul>
 			</div>
 		</header>
 
 		<!-- One -->
-		<section id="one" class="wrapper style2 special">
+		<section id="one" class="wrapper">
+			<div class="inner alt">
+				<section class="spotlight" >
+					<div class="content" style="width:100%">
+						<h3>Where are you studying today?</h3>
+						<div id="map"></div>
+
+						<ul style="min-width: 100px; display: block; padding-top: 9px; float: right" class="actions">
+							<li><a href="#two" class="button special scrolly">Next</a></li>
+						</ul>
+					</div>
+
+				</section>
+			</div>
+		</section>
+
+
+        <!-- Two -->
+		<section id="two" class="wrapper style2 special">
 			<header class="major">
 				<h2>What are you studying?</h2>
 			</header>
 			<form method="post" action="setTopic()">
 				<div class="row uniform">
-			    <ul class="actions fit">
-				    <li><input id="arts" name="topic" type="radio"><label for="arts">Arts           </label></li>
-				    <li><input id="humn" name="topic" type="radio"><label for="humn">Humanities     </label></li>
-				    <li><input id="engr" name="topic" type="radio"><label for="engr">Engineering</label></li>
-			    </ul>
-			    <ul class="actions fit">
-				    <li><input id="math" name="topic" type="radio"><label for="math">Math</label></li>
-				    <li><input id="nats" name="topic" type="radio"><label for="nats">Natural Science </label></li>
-				    <li><input id="soci" name="topic" type="radio"><label for="soci">Social Science </label></li>
-			    </ul>
-          <ul class="actions fit">
-            <li><input id="none" name="topic" type="radio"><label for="none">Nothing</label></li>
-          </ul>
-			    <div class="12u$">
-			      <input type="text" style="text-align:center" id="specific" placeholder="Specific topic">
-		        <a id="submit" onclick="setTopic()" type="submit" class="button special">Save</a>
-			    </div>
+					<ul class="actions fit">
+						<li><input id="arts" name="topic" type="radio"><label for="arts">Arts</label></li>
+						<li><input id="humn" name="topic" type="radio"><label for="humn">Humanities</label></li>
+						<li><input id="engr" name="topic" type="radio"><label for="engr">Engineering</label></li>
+					</ul>
+					<ul class="actions fit">
+						<li><input id="math" name="topic" type="radio"><label for="math">Math</label></li>
+						<li><input id="nats" name="topic" type="radio"><label for="nats">Natural Science</label></li>
+						<li><input id="soci" name="topic" type="radio"><label for="soci">Social Science</label></li>
+					</ul>
+
+					<div class="content">
+						<!--<div class="12u$">-->
+							Department:
+					  		<input type="text" style="text-align:center" id="dept" placeholder="CSCI">
+							Course Number:
+					  		<input type="text" style="text-align:center" id="course-id" placeholder="1000">
+			    		<!--</div>-->
+					</div>
+					<div class="content">
+						Description:
+						<textarea style="height: 10em" id="description"></textarea>
+					</div>
 				</div>
 			</form>
+			<section class="spotlight">
+				<div class="content">
+					<ul class="actions">
+						<li><h3>Create your study group</h3></li>
+						<li style="padding-bottom: 1%"><a href="/" onclick="setTopic()" class="button special">Finish</a></li>
+					</ul>
+				</div>
+			</section>
 		</section>
-
-        <!-- Two -->
-		<section id="two" class="wrapper">
-			<div class="inner alt">
-				<section class="spotlight">
-					<div class="content">
-						<h3>Where are you studying today?</h3>
-						<div id="map">
-						</div>
-
-<script src="../extern/api/googlemaps"
-    async defer></script>
-
-
-	</div>
-		</section>
-				<section class="spotlight">
-					<div class="content">
-						<ul class="actions">
-							<li><h3>See what others are working on</h3></li>
-							<li><a href="/nearby" class="button special">Go ></a></li>
-						</ul>
-					</div>
-				</section>
-			</div>
-		</section>
-
 
 
 	  <!-- Scripts -->
@@ -106,7 +105,6 @@
 	  <script src="../static/js/jquery.scrolly.min.js"></script>
 	  <script src="../static/js/skel.min.js"></script>
 	  <script src="../static/js/util.js"></script>
-	  <!--[if lte IE 8]><script src="../static/js/ie/respond.min.js"></script><![endif]-->
 	  <script src="../static/js/main.js"></script>
 
 	</body>

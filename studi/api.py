@@ -99,6 +99,10 @@ def get_study_groups():
         d["topic"] = group.topic
         d['latitude'] = group.latitude
         d['longitude'] = group.longitude
+        d['duration'] = group.duration
+        d['dept'] = group.department
+        d['course_num'] = group.course_num
+        d['desc'] = group.description
         d['create_date'] = group.create_date
         members = []
         for m in group.members:
@@ -121,7 +125,17 @@ def create_study_group():
     query = s.query(User).filter(User.id == session['user_id'])
     user = query.first()
     data = json.loads(request.data)
-    new_group = StudyGroup(data['topic'], data['lat'], data['lon'], datetime.datetime.now())
+
+    topic = data['topic']
+    lat = data['lat']
+    lon = data['lon']
+    duration = 1.0
+    dept = data['dept']
+    course_num = data['course_num']
+    description = data['description']
+    create_date = datetime.datetime.now()
+
+    new_group = StudyGroup(topic, lat, lon, duration, dept, course_num, description, create_date)
     new_group.add_member(user, "OWNER")
     logging.debug('created study group')
 

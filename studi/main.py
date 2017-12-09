@@ -19,8 +19,20 @@ def before_request():
 
 @app.route('/')
 def home():
+    return render_template("main_page.html")
+
+
+@app.route('/home')
+def redirect_old():
+    return redirect(url_for('home'), code=301)  # for cordova install
+
+
+@app.route('/create_group')
+def create_group():
     if not session.get('logged_in'):
-        return render_template('login.html')
+        session['redirect-target'] = url_for('create_group')
+        print("Set redirect target: {}".format(session['redirect-target']))
+        return redirect(url_for('login'))
     else:
         return render_template("landing.html")
 
@@ -35,6 +47,13 @@ def create():
     if session.get('logged_in'):
         return redirect(url_for('home'))
     return render_template("createAccount.html")
+
+
+@app.route('/login')
+def login():
+    if session.get('logged_in'):
+        return redirect(url_for('home'))
+    return render_template('login.html')
 
 
 @app.route('/createAccount', methods=['POST'])
@@ -64,10 +83,10 @@ def do_create_account():
     s.add(new_user)
     s.commit()
     flash("Account created!")
-    return redirect(url_for('home'))
+    return redirect(url_for('login'))
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/login_post', methods=['POST'])
 def do_admin_login():
          
     post_username = str(request.form['username'])
@@ -82,7 +101,11 @@ def do_admin_login():
         session['user_id'] = result.id
     else:
         flash("Incorrect username or password!")
-    return redirect(url_for('home'))
+    if session.get('redirect-target'):
+        print("redirect to {}".format(session['redirect-target']))
+        return redirect(session['redirect-target'])
+    else:
+        return redirect(url_for('home'))
 
 
 @app.route("/logout")
