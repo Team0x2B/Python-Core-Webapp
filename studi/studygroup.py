@@ -10,15 +10,23 @@ class StudyGroup(db.Model):
     topic = Column(db.String)
     latitude = Column(db.Float)
     longitude = Column(db.Float)
+    duration = Column(db.Float)
+    department = Column(db.String)
+    course_num = Column(db.String)
+    description = Column(db.String)
     create_date = Column(db.Date)
     members = relationship("GroupMembership",
                            cascade="save-update, merge, "
                                    "delete, delete-orphan")
 
-    def __init__(self, topic, latitude, longitude, create_date):
+    def __init__(self, topic, latitude, longitude, duration, department, course_num, description, create_date):
         self.topic = topic
         self.latitude = latitude
         self.longitude = longitude
+        self.duration = duration
+        self.department = department
+        self.course_num = course_num
+        self.description = description
         self.create_date = create_date
 
     def add_member(self, user, role):

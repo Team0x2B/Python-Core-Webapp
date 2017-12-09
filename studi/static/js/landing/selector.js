@@ -22,38 +22,44 @@ function pageInit() {
 //arts, humn, engr, math, nats, soci
 function setTopic() {
       if (document.getElementById('arts').checked) {
-        topicval = 'arts';
+        topicval = 'ART';
       }
       else if (document.getElementById('humn').checked)
       {
-        topicval = 'humn';
+        topicval = 'HUMANITIES';
       }
       else if (document.getElementById('engr').checked)
       {
-        topicval = 'engr';
+        topicval = 'ENGINEERING';
       }
       else if (document.getElementById('math').checked)
       {
-        topicval = 'math';
+        topicval = 'MATH';
       }
       else if (document.getElementById('nats').checked)
       {
-        topicval = 'nats';
+        topicval = 'NATURAL SCIENCES';
       }
       else if (document.getElementById('soci').checked)
       {
-        topicval = 'soci';
+        topicval = 'SOCIAL SCIENCES';
       }
       else
       {
-          topicval = 'none';
+          topicval = 'NONE';
       }
 
 
+    dept = document.getElementById("dept").value;
+    course_num = document.getElementById("course-id").value;
+    description = document.getElementById("description").value;
     var post_data = {
         "topic": topicval,
         "lat": groupMarker.getPosition().lat(),
-        "lon": groupMarker.getPosition().lng()
+        "lon": groupMarker.getPosition().lng(),
+        "dept": dept,
+        "course_num": course_num,
+        "description": description
     }
 
     console.log("topicval" + topicval)

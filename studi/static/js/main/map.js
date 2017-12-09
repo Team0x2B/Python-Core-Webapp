@@ -51,7 +51,6 @@ function initMap() {
     console.log("hello");
 };
 
-function onMarkerClick(marker, key, group_data) {
-    console.log(group_data);
-    showInfoWindow(group_data.topic, "CSCI 3308", "Student", 1, "This is a description of what this study group is about.");
+function onMarkerClick(marker, key, group) {
+    showInfoWindow(group);
 }

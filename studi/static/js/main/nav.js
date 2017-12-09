@@ -13,12 +13,12 @@ function hideInfoWindow() {
     document.getElementById("info-window").style.display = "none";
 }
 
-function showInfoWindow(title, subtitle, author, count, desc) {
+function showInfoWindow(group) {
     document.getElementById("info-window").style.display = "block";
 
-    document.getElementById("title").innerHTML = title;
-    document.getElementById("specific").innerHTML = subtitle;
-    document.getElementById("author").innerHTML = author;
-    document.getElementById("count").innerHTML = count;
-    document.getElementById("info").innerHTML = desc;
+    document.getElementById("title").innerHTML = group.topic;
+    document.getElementById("specific").innerHTML = group.dept + ": " + group.course_num;
+    document.getElementById("author").innerHTML = "Student";
+    document.getElementById("count").innerHTML = group.members.length;
+    document.getElementById("info").innerHTML = group.desc;
 }

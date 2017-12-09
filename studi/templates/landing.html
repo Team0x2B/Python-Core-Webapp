@@ -41,35 +41,7 @@
 		</header>
 
 		<!-- One -->
-		<section id="one" class="wrapper style2 special">
-			<header class="major">
-				<h2>What are you studying?</h2>
-			</header>
-			<form method="post" action="setTopic()">
-				<div class="row uniform">
-			    <ul class="actions fit">
-				    <li><input id="arts" name="topic" type="radio"><label for="arts">Arts           </label></li>
-				    <li><input id="humn" name="topic" type="radio"><label for="humn">Humanities     </label></li>
-				    <li><input id="engr" name="topic" type="radio"><label for="engr">Engineering</label></li>
-			    </ul>
-			    <ul class="actions fit">
-				    <li><input id="math" name="topic" type="radio"><label for="math">Math</label></li>
-				    <li><input id="nats" name="topic" type="radio"><label for="nats">Natural Science </label></li>
-				    <li><input id="soci" name="topic" type="radio"><label for="soci">Social Science </label></li>
-			    </ul>
-          <ul class="actions fit">
-            <li><input id="none" name="topic" type="radio"><label for="none">Nothing</label></li>
-          </ul>
-			    <div class="12u$">
-			      <input type="text" style="text-align:center" id="specific" placeholder="Specific topic">
-		        <!--<a id="submit" onclick="setTopic()" type="submit" class="button special">Save</a>-->
-			    </div>
-				</div>
-			</form>
-		</section>
-
-        <!-- Two -->
-		<section id="two" class="wrapper">
+		<section id="one" class="wrapper">
 			<div class="inner alt">
 				<section class="spotlight" >
 					<div class="content" style="width:100%">
@@ -78,17 +50,51 @@
 						</div>
 					</div>
 				</section>
-				<section class="spotlight">
-					<div class="content">
-						<ul class="actions">
-							<li><h3>Create your study group</h3></li>
-							<li style="padding-bottom: 1%"><a href="/" onclick="setTopic()" class="button special">Finish</a></li>
-						</ul>
-					</div>
-				</section>
 			</div>
 		</section>
 
+
+        <!-- Two -->
+		<section id="two" class="wrapper style2 special">
+			<header class="major">
+				<h2>What are you studying?</h2>
+			</header>
+			<form method="post" action="setTopic()">
+				<div class="row uniform">
+					<ul class="actions fit">
+						<li><input id="arts" name="topic" type="radio"><label for="arts">Arts</label></li>
+						<li><input id="humn" name="topic" type="radio"><label for="humn">Humanities</label></li>
+						<li><input id="engr" name="topic" type="radio"><label for="engr">Engineering</label></li>
+					</ul>
+					<ul class="actions fit">
+						<li><input id="math" name="topic" type="radio"><label for="math">Math</label></li>
+						<li><input id="nats" name="topic" type="radio"><label for="nats">Natural Science</label></li>
+						<li><input id="soci" name="topic" type="radio"><label for="soci">Social Science</label></li>
+					</ul>
+
+					<div class="content">
+						<!--<div class="12u$">-->
+							Department:
+					  		<input type="text" style="text-align:center" id="dept" placeholder="CSCI">
+							Course Number:
+					  		<input type="text" style="text-align:center" id="course-id" placeholder="1000">
+			    		<!--</div>-->
+					</div>
+					<div class="content">
+						Description:
+						<textarea style="height: 10em" id="description"></textarea>
+					</div>
+				</div>
+			</form>
+			<section class="spotlight">
+				<div class="content">
+					<ul class="actions">
+						<li><h3>Create your study group</h3></li>
+						<li style="padding-bottom: 1%"><a onclick="setTopic()" class="button special">Finish</a></li>
+					</ul>
+				</div>
+			</section>
+		</section>
 
 
 	  <!-- Scripts -->
