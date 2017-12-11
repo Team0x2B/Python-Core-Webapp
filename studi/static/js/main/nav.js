@@ -33,7 +33,14 @@ function openMyGroups(group_id) {
     console.log("oy vey");
     openSidebar();
     construct_group_info_popout(group_id);
+    $("#groups-sidebar").on("transitionend webkitTransitionEnd msTransitionEnd oTransitionEnd",
+         function(e){
+            console.log("sidebar done moving");
+            centerMiniMap();
+            $(this).off(e);
+     });
     document.getElementById("groups-sidebar").style.width = "100%";
+    console.log("moving sidebar");
 
 }
 

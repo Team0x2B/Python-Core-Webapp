@@ -44,7 +44,6 @@ function do_build_info_popout(group) {
     }
     user_permissions = group.allowed_actions;
     if (current_group_id != group.id) {
-        centerMiniMap();
         setText(document.getElementById("group-info-title"), group.topic);
         setText(document.getElementById("group-info-subtitle"), group.dept + ": " + group.course_num);
         setText(document.getElementById("group-info-author"), group.members[0].username);
@@ -128,7 +127,6 @@ function initMiniMap() {
     google.maps.event.addListenerOnce(minimap, 'idle', function(){
         document.getElementById('minimap').firstChild.firstChild.childNodes[1].style.position = "relative";
     });
-
 }
 
 function centerMiniMap() {
@@ -136,5 +134,4 @@ function centerMiniMap() {
     new_center = new google.maps.LatLng(current_group_location[0], current_group_location[1]);
     minimap.setCenter(new_center);
     marker.setPosition(new_center);
-
 }
