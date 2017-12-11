@@ -49,12 +49,10 @@
         </div>
 
         <div id="map"></div>
-        <!--<script src="../static/js/main/mabbox.js"></script>-->
-
         <div id="main-sidebar-menu" class="sidebar-menu">
             <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">&times;</a>
             <a href="../create_group">Create Group</a>
-            <a href="javascript:void(0)" class="mygrpbtn" onclick="hideInfoWindow(); openMyJoinedGroup();" target="group_info_frame">My Groups</a>
+            <a href="javascript:void(0)" class="mygrpbtn" onclick="hideInfoWindow(); openMyJoinedGroup();" target="group_info_frame">My Group</a>
             {% if not session.logged_in %}
                 <a href="../login" class="login-button">Login or Create Account</a>
             {% else %}
@@ -63,9 +61,6 @@
         </div>
         <div id="groups-sidebar" class="sidebar-menu">
             <a href="javascript:void(0)" class="closebtn" onclick="closeMyGroups()">&times;</a>
-            <!--<iframe id="group_info_section" src="/mygroups", name="group_info_frame">-->
-                <!--<p>iframe didn't load</p>-->
-            <!--</iframe>-->
             <div id="group-info-container">
                 <div id="group-info-top-section" class="section">
                     <div id="group-info-detailed-group-info">
@@ -73,13 +68,6 @@
                         <p><h2 id="group-info-subtitle" align="right">CSCI: 2400</h2></p>
                         <p><h3 id="group-info-author" align="right">Ethan Hunter</h3></p>
                         <p><h4 id="group-info-time" align="right">Some Time</h4></p>
-                        <!--{% if can_join %}-->
-                        <!--<a id="join-button" class="action-button" href="javascript:void(0)" onclick="joinGroup({{id}})">Join Group</a>-->
-                        <!--{% elif can_leave %}-->
-                            <!--<a id="leave-button" class="action-button" href="javascript:void(0)" onclick="leaveGroup({{id}})">Leave Group</a>-->
-                        <!--{% elif can_delete %}-->
-                            <!--<a id="delete-button" class="action-button" href="javascript:void(0)" onclick="deleteGroup({{id}})">Delete Group</a>-->
-                        <!--{% endif %}-->
                     </div>
                     <div id="group-info-location-info">
                         <div id="minimap">Loading...</div>
