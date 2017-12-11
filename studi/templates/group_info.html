@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Group Info</title>
+
+
+    <link rel="stylesheet" type="text/css" href="../static/css/group_info.css" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='studi_icon.ico') }}">
+    <script src="../static/js/main/map.js"></script>
+    <!--<script src="../extern/api/googlemaps" async defer></script>-->
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/jquery.scrolly.min.js"></script>
+    <script src="../static/js/skel.min.js"></script>
+    <script src="../static/js/util.js"></script>
+    <script src="../static/js/group_info/actions.js"></script>
+    <!--<script src="../static/js/main/nav.js"></script>-->
+
+    <!--<script src='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.js'></script>-->
+    <!--<link href='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+<body>
+    <div id="top-section" class="section">
+        <div id="info">
+            <p><h1 id="group-title" align="right">{{ topic }}</h1></p>
+            <p><h2 align="right">{{ department }}: {{ course_num }}</h2></p>
+            <p><h3 align="right">{{ owner }}</h3></p>
+            <p><h4 align="right">{{ end_date  }}</h4></p>
+            {% if can_join %}
+                <a id="join-button" class="action-button" href="javascript:void(0)" onclick="joinGroup({{id}})">Join Group</a>
+            {% elif can_leave %}
+                <a id="leave-button" class="action-button" href="javascript:void(0)" onclick="leaveGroup({{id}})">Leave Group</a>
+            {% elif can_delete %}
+                <a id="delete-button" class="action-button" href="javascript:void(0)" onclick="deleteGroup({{id}})">Delete Group</a>
+            {% endif %}
+        </div>
+        <div id="location-info">
+            <div id="map">Loading...</div>
+            <div di="Room">
+                Room #
+            </div>
+        </div>
+    </div>
+    <div id="mid section" class="section">
+        <p>
+            {{ description }}
+        </p>
+    </div>
+    <div id="bottom-section" class="section">
+        <div id="title">
+            <h3 align="center">Members</h3>
+        </div>
+        <div id="members-list">
+            {% for m in members %}
+                <div class="list-entry">
+                    {{m.name}} ({{m.role}})
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
