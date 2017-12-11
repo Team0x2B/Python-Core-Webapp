@@ -75,6 +75,7 @@ function create_action_button(group_id, user_permissions) {
         }
     }
     if (!action_button) {
+        console.log("no action button to reuse");
         action_button = document.createElement("a")
         detailed_info.appendChild(action_button);
     }

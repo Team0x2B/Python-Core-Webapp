@@ -1,6 +1,6 @@
 
 function joinGroup(id) {
-    fast_update_remove(id, {can_leave: true})
+    fast_update_remove(id, {can_leave: true, can_join: false})
     $.ajax({
         url: "/api/join_group/" + id,
         xhrFields: {withCredentials: true},
@@ -12,7 +12,7 @@ function joinGroup(id) {
 }
 
 function leaveGroup(id) {
-    fast_update_remove(id, {can_join: true})
+    fast_update_remove(id, {can_join: true, can_leave: false})
     $.ajax({
         url: "/api/leave_group/" + id,
         xhrFields: {withCredentials: true},
