@@ -106,6 +106,7 @@ def leave_group(group_id):
         if m.user.id == user.id:
             to_remove = m
     group.members.remove(to_remove)
+    db.session.commit()
     return ok_status()
 
 
