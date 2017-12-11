@@ -5,6 +5,9 @@ function joinGroup(id) {
         xhrFields: {withCredentials: true},
         type: "POST",
         contentType: "application/json",
+        success: function(result) {
+            construct_group_info_popout(id);
+        }
     });
     construct_group_info_popout(id);
 }
@@ -15,8 +18,11 @@ function leaveGroup(id) {
         xhrFields: {withCredentials: true},
         type: "POST",
         contentType: "application/json",
+        success: function(result) {
+            construct_group_info_popout(id);
+        }
     });
-    construct_group_info_popout(id);
+
 }
 
 function deleteGroup(id) {

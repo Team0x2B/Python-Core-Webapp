@@ -93,3 +93,7 @@ function create_action_button(user_permissions) {
         detailed_info.appendChild(delete_button);
     }
 }
+
+function fast_update(action_button_attributes) {
+
+}
