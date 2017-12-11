@@ -132,6 +132,9 @@ function initMiniMap() {
 }
 
 function centerMiniMap() {
-    minimap.setCenter(new google.maps.LatLng(current_group_location[0], current_group_location[1]));
+    google.maps.event.trigger(minimap, 'resize');
+    new_center = new google.maps.LatLng(current_group_location[0], current_group_location[1]);
+    minimap.setCenter(new_center);
+    marker.setPosition(new_center);
 
 }
