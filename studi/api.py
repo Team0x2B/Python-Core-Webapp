@@ -45,6 +45,22 @@ def get_users():
     return jsonify(results)
 
 
+@app.route("/api/get_joined_group", methods=["GET"])
+def get_joined_group():
+    if not session.get('logged_in'):
+        return jsonify({"group_id": -1})
+
+    user = db.session.query(User).filter(User.id == session['user_id']).first()
+    if not user:
+        return jsonify({"group_id": -1})
+
+    if len(user.groups) > 0:
+        membership = user.groups[0]
+        return jsonify({"group_id": membership.group.id})
+    else:
+        return jsonify({"group_id": -1})
+
+
 @app.route('/api/join_group/<int:group_id>', methods=['POST'])
 def add_to_group(group_id):
     if not session.get('logged_in'):

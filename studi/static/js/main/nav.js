@@ -43,6 +43,21 @@ function closeMyGroups() {
     closeSidebar();
 }
 
-function openMyGroup() {
+function getMyGroup(callback) {
+    $.ajax({
+        url: "/api/get_joined_group",
+        xhrFields: {withCredentials: true},
+        type: "GET",
+        contentType: "application/json",
+        success: callback
+   });
+}
 
+function openMyJoinedGroup() {
+    getMyGroup(function(response) {
+        console.log(response.group_id)
+        if (response.group_id != -1) {
+            openMyGroups(response.group_id);
+        }
+    });
 }
