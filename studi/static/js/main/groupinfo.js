@@ -68,7 +68,6 @@ function create_members_list(members) {
         entry.setAttribute('class', 'list-entry');
         console.log(m.username);
         setText(entry, m.username);
-        console.log(entry);
         container.appendChild(entry);
     });
 }
@@ -88,7 +87,6 @@ function create_action_button(group_id, user_permissions) {
     }
     action_button.setAttribute("class", "action-button");
     action_button.setAttribute("href", "javascript:void(0)");
-    console.log(user_permissions);
     if (user_permissions.can_join) {
         action_button.setAttribute('id', 'join-button');
         action_button.setAttribute("onclick", "joinGroup(" + group_id + ");");
