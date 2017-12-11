@@ -40,7 +40,7 @@ function initMap() {
                 }} )(group,key) );
                 group.setMap(map);
                 console.log(val.id + " is added to list");
-                groups.push({id: val.id, marker: group});
+                groups.push({id: val.id, marker: group, keyword: val.topic});
             });
 
         });
@@ -48,7 +48,23 @@ function initMap() {
         alert("geolocation error: " + err.message + " code: " + err.code);
     }, {maximumAge:600000, timeout:5000, enableHighAccuracy: true}); // end getCurrentPosition
     console.log("hello");
+
+     var input = document.getElementById("menu-search-field");
+
+    input.addEventListener('input', function()
+    {
+       if (input.value == "") {
+            showAll();
+       } else {
+            showFromKeyword(input.value);
+       }
+    });
 };
+
+function resetSearch() {
+    document.getElementById('menu-search-field').value = ''
+    showAll();
+}
 
 function removeGroupMarker(group_id) {
     console.log("removing group: " + group_id);
@@ -65,4 +81,20 @@ function removeGroupMarker(group_id) {
 
 function onMarkerClick(marker, key, group) {
     showInfoWindow(group);
+}
+
+function showFromKeyword(keyword) {
+    groups.forEach(function(g) {
+        if (g.keyword.toLowerCase().indexOf(keyword.toLowerCase()) == -1) {
+            g.marker.setMap(null);
+        } else {
+            g.marker.setMap(map);
+        }
+    });
+}
+
+function showAll() {
+    groups.forEach(function(g) {
+        g.marker.setMap(map);
+    });
 }
