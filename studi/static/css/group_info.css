@@ -1,0 +1,60 @@
+
+html, body {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    max-height: 33%;
+    overflow: hidden;
+}
+
+#top-section {
+    font-size: 80%;
+    float: center;
+}
+
+#info {
+    flex-grow: 1;
+    margin-top: 0;
+    float: left;
+    display: inline-block;
+}
+
+
+#location-info {
+    flex-basis: 250px;
+    flex-grow: 3;
+    margin-left: 10px;
+    display: inline-block;
+    float: right;
+    font-size: 15px;
+}
+
+#map {
+    width: 100%;
+    height: 200px;
+    background-color: red;
+}
+
+#bottom-section {
+    flex-direction: column;
+}
+
+#members-list {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+#members-list div{
+    text-align: center;
+    border: 1px;
+    border-style: solid;
+    border-color: black;
+    margin: 1px 4px 1px 4px;
+    padding: 10px 10px 10px 10px;
+    overflow: hidden;
+}

@@ -198,10 +198,14 @@
     margin-left: 50px;
 }
 
-.mapboxgl-marker{
-  height: 18px;
-  width: 18px;
-  background-color: #ff8280;
-  border: 3px solid white;
-  border-radius: 50%;
+#groups-sidebar {
+    max-width: 500px;
+    z-index: 11;
+}
+
+#groups-sidebar iframe {
+    height: 90%;
+    width: 100%;
+    border-style: none;
+    padding: 0 0 0 0;
 }

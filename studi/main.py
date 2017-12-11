@@ -1,8 +1,9 @@
-from flask import flash, render_template, request, session, redirect, url_for
+from flask import flash, render_template, request, session, redirect, url_for, abort
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 from studi import app, db
 from studi.user import User
+from studi.studygroup import StudyGroup
 
 
 @app.before_request
@@ -37,9 +38,29 @@ def create_group():
         return render_template("landing.html")
 
 
-@app.route('/nearby')
-def nearby():
-    return "This section isn't up and running yet, check back soon!"
+@app.route('/group_info/<int:group_id>')
+def group_info(group_id):
+    query = db.session.query(StudyGroup).filter(StudyGroup.id == group_id)
+    group = query.first()
+    if not group:
+        abort(404)
+
+    members = []
+    for m in group.members:
+        members.append({"name": m.user.username, "role": m.role.title()})
+    return render_template("group_info.html",
+                           topic=group.topic,
+                           department=group.department,
+                           course_num=group.course_num,
+                           owner="Student",
+                           end_date=group.create_date,
+                           members=members
+                           )
+
+
+@app.route('/mygroups')
+def my_groups():
+    return render_template("groups.html")
 
 
 @app.route('/create')
@@ -88,10 +109,9 @@ def do_create_account():
 
 @app.route('/login_post', methods=['POST'])
 def do_admin_login():
-         
     post_username = str(request.form['username'])
     post_password = str(request.form['password'])
-    
+
     s = db.session
     query = s.query(User).filter(User.username == post_username)
     result = query.first()
