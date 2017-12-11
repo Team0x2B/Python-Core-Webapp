@@ -54,11 +54,11 @@ def add_to_group(group_id):
     user_query = s.query(User).filter(User.id == session['user_id'])
 
     group = groups_query.first()
-    if not group:
-        return error_status()
     user = user_query.first()
-    if user.group:
-        print(user.group[0].group)
+
+    if not group or not user:
+        return error_status()
+    if not group.can_user_join(user):
         return error_status()
 
     group.add_member(user, "NORMAL")
@@ -67,7 +67,7 @@ def add_to_group(group_id):
     return ok_status()
 
 
-@app.route('/api/delete_group/<int:group_id>', methods=['GET', 'POST'])
+@app.route('/api/delete_group/<int:group_id>', methods=['POST'])
 def delete_group(group_id):
     if not session.get('logged_in'):
         return handle_not_logged_in()
@@ -75,14 +75,37 @@ def delete_group(group_id):
 
     query = s.query(StudyGroup).filter(StudyGroup.id == group_id)
     group = query.first()
+    user = db.session.query(User).filter(User.id == session['user_id']).first()
 
-    if not any([m.user.id == session['user_id'] for m in group.members if m.role == "OWNER"]):
+    if not group or not user:
+        return error_status()
+    if not group.can_user_delete(user):
         print("user not owner")
         return error_status()
-    if not group:
-        return error_status()
+
     s.delete(group)
     s.commit()
+    return ok_status()
+
+
+@app.route('/api/leave_group/<int:group_id>', methods=['POST'])
+def leave_group(group_id):
+    if not session.get('logged_in'):
+        return handle_not_logged_in()
+    s = db.session
+
+    query = s.query(StudyGroup).filter(StudyGroup.id == group_id)
+    group = query.first()
+    user = db.session.query(User).filter(User.id == session['user_id']).first()
+    if not group or not user:
+        return error_status()
+    if not group.can_user_leave(user):
+        return error_status()
+    to_remove = None
+    for m in group.members:
+        if m.user.id == user.id:
+            to_remove = m
+    group.members.remove(to_remove)
     return ok_status()
 
 

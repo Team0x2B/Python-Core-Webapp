@@ -54,7 +54,7 @@
         <div id="main-sidebar-menu" class="sidebar-menu">
             <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">&times;</a>
             <a href="../create_group">Create Group</a>
-            <a href="javascript:void(0)" class="mygrpbtn" onclick="openMyGroups()">My Groups</a>
+            <a href="/mygroups" class="mygrpbtn" onclick="openMyGroups()" target="group_info_frame">My Groups</a>
             {% if not session.logged_in %}
                 <a href="../login" class="login-button">Login or Create Account</a>
             {% else %}

@@ -40,27 +40,51 @@ def create_group():
 
 @app.route('/group_info/<int:group_id>')
 def group_info(group_id):
-    query = db.session.query(StudyGroup).filter(StudyGroup.id == group_id)
-    group = query.first()
+    group = db.session.query(StudyGroup).filter(StudyGroup.id == group_id).first()
+
     if not group:
         abort(404)
 
     members = []
     for m in group.members:
         members.append({"name": m.user.username, "role": m.role.title()})
+
+    can_delete = False
+    can_join = False
+    can_leave = False
+
+    if session.get("logged_in"):
+        user = db.session.query(User).filter(User.id == session['user_id']).first()
+        can_delete = group.can_user_delete(user)
+        can_join = group.can_user_join(user)
+        can_leave = group.can_user_leave(user)
+
     return render_template("group_info.html",
+                           id=group.id,
                            topic=group.topic,
                            department=group.department,
                            course_num=group.course_num,
                            owner="Student",
                            end_date=group.create_date,
+                           description=group.description,
+                           can_join=can_join,
+                           can_delete=can_delete,
+                           can_leave=can_leave,
                            members=members
                            )
 
 
 @app.route('/mygroups')
 def my_groups():
-    return render_template("groups.html")
+    if not session.get('logged_in'):
+        abort(404)
+    user = db.session.query(User).filter(User.id == session['user_id']).first()
+    if not user:
+        abort(404)
+    groups = []
+    for g in user.groups:
+        groups.append({"id": g.group.id, "topic": g.group.topic})
+    return render_template("groups.html", groups=groups)
 
 
 @app.route('/create')

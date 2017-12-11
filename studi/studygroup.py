@@ -32,6 +32,24 @@ class StudyGroup(db.Model):
     def add_member(self, user, role):
         self.members.append(GroupMembership(user, role))
 
+    def can_user_delete(self, user):
+        for m in self.members:
+            if m.user.id == user.id:
+                return m.role == "OWNER"
+        return False
+
+    def can_user_join(self, user):
+        for m in self.members:
+            if m.user.id == user.id:
+                return False
+        return True
+
+    def can_user_leave(self, user):
+        for m in self.members:
+            if m.user.id == user.id:
+                return m.role != "OWNER"
+        return False
+
     def __repr__(self):
         member_str = "{usr} ({rl}), "
         rep = "Study Group: {" + \
@@ -48,7 +66,7 @@ class GroupMembership(db.Model):
     group_id = Column(db.Integer, ForeignKey("groups.id"), primary_key=True)
     role = Column(db.String)
     user = relationship("User")
-    groups = relationship("StudyGroup")
+    group = relationship("StudyGroup")
 
     def __init__(self, user, role):
         self.user = user

@@ -25,21 +25,11 @@
 <body>
     <div id="container">
         <div id="group-list">
-            <div class="group-list-item">
-                Group #1
-            </div>
-            <div class="group-list-item">
-                Group #1
-            </div>
-            <div class="group-list-item">
-                Group #1
-            </div>
-            <div class="group-list-item">
-                Group #1
-            </div>
-            <div class="group-list-item">
-                Group #1
-            </div>
+            {% for g in groups %}
+                <div class="group-list-item">
+                    <a href="/group_info/{{ g.id }}">Group ({{ g.topic }})</a>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </body>
