@@ -5,25 +5,22 @@ function joinGroup(id) {
         xhrFields: {withCredentials: true},
         type: "POST",
         contentType: "application/json",
-        success: function(result) {
-            construct_group_info_popout(id);
-        }
+        success: do_build_info_popout
     });
-    fast_update_remove({can_leave: true})
+    fast_update_remove(id, {can_leave: true})
     construct_group_info_popout(id);
 }
 
 function leaveGroup(id) {
+    console.log(id);
     $.ajax({
         url: "/api/leave_group/" + id,
         xhrFields: {withCredentials: true},
         type: "POST",
         contentType: "application/json",
-        success: function(result) {
-            construct_group_info_popout(id);
-        }
+        success: do_build_info_popout
     });
-    fast_update_remove({can_join: true})
+    fast_update_remove(id, {can_join: true})
 }
 
 function deleteGroup(id) {

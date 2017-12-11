@@ -26,19 +26,24 @@ function setText(e, text) {
 }
 
 function construct_group_info_popout(group_id) {
-    $.when(get_group_info(group_id), get_user_permissions(group_id)).then(do_build_info_popout)
+    $.ajax({
+        url: "/api/get_group_by_id/" + group_id,
+        xhrFields: {withCredentials: true},
+        type: "GET",
+        contentType: "application/json",
+        success: do_build_info_popout
+   });
 }
 
-function do_build_info_popout(group_response, user_permissions_response) {
-    group = group_response[0];
-    user_permissions = user_permissions_response[0];
+function do_build_info_popout(group) {
+    user_permissions = group.allowed_actions;
     setText(document.getElementById("group-info-title"), group.topic);
     setText(document.getElementById("group-info-subtitle"), group.dept + ": " + group.course_num);
     setText(document.getElementById("group-info-author"), group.members[0].username);
     setText(document.getElementById("group-info-time"), "Feature Coming Soon");
     setText(document.getElementById("group-info-description"), group.desc);
 
-    create_action_button(user_permissions);
+    create_action_button(group.id, user_permissions);
     create_members_list(group.members);
 }
 
@@ -59,7 +64,7 @@ function create_members_list(members) {
     });
 }
 
-function create_action_button(user_permissions) {
+function create_action_button(group_id, user_permissions) {
     detailed_info = document.getElementById("group-info-detailed-group-info")
     for (var i = 0; i < detailed_info.childNodes.length; i++) {
         if (detailed_info.childNodes[i].className == "action-button") {
@@ -73,7 +78,7 @@ function create_action_button(user_permissions) {
         join_button.setAttribute('id', 'join-button');
         join_button.setAttribute("class", "action-button");
         join_button.setAttribute("href", "javascript:void(0)");
-        join_button.setAttribute("onclick", "joinGroup(" + group.id + ");");
+        join_button.setAttribute("onclick", "joinGroup(" + group_id + ");");
         setText(join_button, "Join Group");
         detailed_info.appendChild(join_button);
     } else if (user_permissions.can_leave) {
@@ -81,7 +86,7 @@ function create_action_button(user_permissions) {
         leave_button.setAttribute('id', 'leave-button');
         leave_button.setAttribute("class", "action-button");
         leave_button.setAttribute("href", "javascript:void(0)");
-        leave_button.setAttribute("onclick", "leaveGroup(" + group.id + ");");
+        leave_button.setAttribute("onclick", "leaveGroup(" + group_id + ");");
         setText(leave_button, "Leave Group");
         detailed_info.appendChild(leave_button);
     } else if (user_permissions.can_delete) {
@@ -89,12 +94,12 @@ function create_action_button(user_permissions) {
         delete_button.setAttribute('id', 'delete-button');
         delete_button.setAttribute("class", "action-button");
         delete_button.setAttribute("href", "javascript:void(0)");
-        delete_button.setAttribute("onclick", "deleteGroup(" + group.id + ");");
+        delete_button.setAttribute("onclick", "deleteGroup(" + group_id + ");");
         setText(delete_button, "Delete Group");
         detailed_info.appendChild(delete_button);
     }
 }
 
-function fast_update_remove(user_permissions) {
-    create_action_button(user_permissions);
+function fast_update_remove(group_id, user_permissions) {
+    create_action_button(group_id, user_permissions);
 }
