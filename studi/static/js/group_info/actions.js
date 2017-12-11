@@ -27,6 +27,5 @@ function deleteGroup(id) {
         contentType: "application/json",
     });
     window.parent.removeGroupMarker(id);
-    window.parent.hideInfoWindow();
     document.getElementById("group-title").innerHTML = "DELETED";
 }

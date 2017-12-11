@@ -44,7 +44,7 @@
                 <p id="author">Group Owner</p>
                 <p id="count">Number of people</p>
                 <p id="info">Description</p>
-                <a id="more-details" target="group_info_frame" onclick="openMyGroups()">More Details</a>
+                <a id="more-details" target="group_info_frame" onclick="hideInfoWindow(); openMyGroups();">More Details</a>
             </div>
         </div>
 
@@ -54,7 +54,7 @@
         <div id="main-sidebar-menu" class="sidebar-menu">
             <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">&times;</a>
             <a href="../create_group">Create Group</a>
-            <a href="/mygroups" class="mygrpbtn" onclick="openMyGroups()" target="group_info_frame">My Groups</a>
+            <a href="/mygroups" class="mygrpbtn" onclick="hideInfoWindow(); openMyGroups();" target="group_info_frame">My Groups</a>
             {% if not session.logged_in %}
                 <a href="../login" class="login-button">Login or Create Account</a>
             {% else %}
