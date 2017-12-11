@@ -9,8 +9,8 @@ from studi.studygroup import StudyGroup
 import requests
 
 
-def error_status():
-    return jsonify({'status': 'error'})
+def error_status(msg="failed"):
+    return jsonify({'status': 'error', 'msg': msg})
 
 
 def ok_status():
@@ -56,7 +56,7 @@ def get_joined_group():
 
     if len(user.groups) > 0:
         membership = user.groups[0]
-        return jsonify({"group_id": membership.group.id})
+        return jsonify({"group_id": membership.group.id, "msg": "cannot_join_multiple"})
     else:
         return jsonify({"group_id": -1})
 
@@ -212,6 +212,10 @@ def create_study_group():
     s = db.session
     query = s.query(User).filter(User.id == session['user_id'])
     user = query.first()
+
+    if len(user.groups) > 0:
+        return error_status(msg="cannot_join_multiple")
+
     data = json.loads(request.data)
 
     topic = data['topic']
