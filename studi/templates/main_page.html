@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" type="text/css" href="../static/css/home.css" />
     <link rel="shortcut icon" href="{{ url_for('static', filename='studi_icon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="../static/css/group_info.css" />
     <script src="../static/js/main/map.js"></script>
     <script src="../extern/api/googlemaps" async defer></script>
     <script src="../static/js/jquery.min.js"></script>
@@ -16,9 +17,8 @@
     <script src="../static/js/main.js"></script>
     <script src="../static/js/main/nav.js"></script>
 
-    <script src='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />
 
+    <script src="../static/js/main/groupinfo.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 </head>
@@ -44,7 +44,7 @@
                 <p id="author">Group Owner</p>
                 <p id="count">Number of people</p>
                 <p id="info">Description</p>
-                <a id="more-details" target="group_info_frame" onclick="hideInfoWindow(); openMyGroups();">More Details</a>
+                <a id="more-details" onclick="hideInfoWindow(); openMyGroups(infoWindowGroup);">More Details</a>
             </div>
         </div>
 
@@ -54,7 +54,7 @@
         <div id="main-sidebar-menu" class="sidebar-menu">
             <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">&times;</a>
             <a href="../create_group">Create Group</a>
-            <a href="/mygroups" class="mygrpbtn" onclick="hideInfoWindow(); openMyGroups();" target="group_info_frame">My Groups</a>
+            <a href="javascript:void(0)" class="mygrpbtn" onclick="hideInfoWindow(); openMyGroups(1);" target="group_info_frame">My Groups</a>
             {% if not session.logged_in %}
                 <a href="../login" class="login-button">Login or Create Account</a>
             {% else %}
@@ -63,9 +63,44 @@
         </div>
         <div id="groups-sidebar" class="sidebar-menu">
             <a href="javascript:void(0)" class="closebtn" onclick="closeMyGroups()">&times;</a>
-            <iframe id="group_info_section" src="/mygroups", name="group_info_frame">
-                <p>iframe didn't load</p>
-            </iframe>
+            <!--<iframe id="group_info_section" src="/mygroups", name="group_info_frame">-->
+                <!--<p>iframe didn't load</p>-->
+            <!--</iframe>-->
+            <div id="group-info-container">
+                <div id="group-info-top-section" class="section">
+                    <div id="group-info-detailed-group-info">
+                        <p><h1 id="group-info-title" align="right">Engineering</h1></p>
+                        <p><h2 id="group-info-subtitle" align="right">CSCI: 2400</h2></p>
+                        <p><h3 id="group-info-author" align="right">Ethan Hunter</h3></p>
+                        <p><h4 id="group-info-time" align="right">Some Time</h4></p>
+                        <!--{% if can_join %}-->
+                        <!--<a id="join-button" class="action-button" href="javascript:void(0)" onclick="joinGroup({{id}})">Join Group</a>-->
+                        <!--{% elif can_leave %}-->
+                            <!--<a id="leave-button" class="action-button" href="javascript:void(0)" onclick="leaveGroup({{id}})">Leave Group</a>-->
+                        <!--{% elif can_delete %}-->
+                            <!--<a id="delete-button" class="action-button" href="javascript:void(0)" onclick="deleteGroup({{id}})">Delete Group</a>-->
+                        <!--{% endif %}-->
+                    </div>
+                    <div id="group-info-location-info">
+                        <div id="minimap">Loading...</div>
+                        <div id="Room">
+                            Room #
+                        </div>
+                    </div>
+                 </div>
+                <div id="group-info-mid-section" class="section">
+                    <p id="group-info-description">
+                        Thi is a test description
+                    </p>
+                </div>
+                <div id="group-info-bottom-section" class="section">
+                    <div id="members-list-title">
+                        <h3 align="center">Members</h3>
+                    </div>
+                    <div id="members-list">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div id="opaque"></div>

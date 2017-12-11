@@ -140,6 +140,54 @@ def get_study_groups():
     return jsonify(results)
 
 
+@app.route('/api/get_group_by_id/<int:group_id>', methods=['GET'])
+def get_group_by_id(group_id):
+    s = db.session
+    query = s.query(StudyGroup).filter(StudyGroup.id == group_id)
+    group = query.first()
+
+    d = dict()
+    d["id"] = group.id
+    d["topic"] = group.topic
+    d['latitude'] = group.latitude
+    d['longitude'] = group.longitude
+    d['duration'] = group.duration
+    d['dept'] = group.department
+    d['course_num'] = group.course_num
+    d['desc'] = group.description
+    d['create_date'] = group.create_date
+    members = []
+    for m in group.members:
+        m_dict = dict()
+        m_dict['id'] = m.user.id
+        m_dict['username'] = m.user.username
+        m_dict['role'] = m.role
+        members.append(m_dict)
+    d['members'] = members
+
+    return jsonify(d)
+
+
+@app.route('/api/get_user_permission/<int:group_id>', methods=['GET'])
+def get_user_group_permission(group_id):
+    if not session.get('logged_in'):
+        return handle_not_logged_in()
+    s = db.session
+    query = s.query(StudyGroup).filter(StudyGroup.id == group_id)
+    group = query.first()
+    query = s.query(User).filter(User.id == session['user_id'])
+    user = query.first()
+
+    if not group or not user:
+        return error_status()
+
+    can_delete = group.can_user_delete(user)
+    can_leave = group.can_user_leave(user)
+    can_join = group.can_user_join(user)
+
+    return jsonify({"can_join": can_join, "can_leave": can_leave, "can_delete": can_delete})
+
+
 @app.route('/api/create_study_group', methods=['POST'])
 def create_study_group():
     if not session.get('logged_in'):

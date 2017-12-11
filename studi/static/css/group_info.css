@@ -1,31 +1,36 @@
 
-html, body {
-    height: 100vh;
-    overflow: hidden;
+#group-info-container {
+    width: 100%;
+    max-height: 100vh;
+    padding: 0 0 0 0;
+    overflow: auto;
 }
 
 .section {
     width: 100%;
     display: flex;
     flex-direction: row;
-    max-height: 33%;
+    padding: 0 0 0 0;
     overflow: hidden;
 }
 
-#top-section {
-    font-size: 80%;
+#group-info-container {
     float: center;
 }
 
-#info {
+#group-info-detailed-group-info {
     flex-grow: 1;
     margin-top: 0;
     float: left;
     display: inline-block;
 }
 
+#group-info-detailed-group-info p {
+    padding: 0 0 0 0;
+}
 
-#location-info {
+
+#group-info-location-info {
     flex-basis: 250px;
     flex-grow: 3;
     margin-left: 10px;
@@ -34,19 +39,28 @@ html, body {
     font-size: 15px;
 }
 
-#map {
+#group-info-mid-section p{
+    font-size: 18px;
+}
+
+#minimap {
     width: 100%;
     height: 200px;
     background-color: red;
 }
 
-#bottom-section {
+#group-info-bottom-section {
+    height: 100%;
+    min-height: -webkit-min-content;
     flex-direction: column;
+    bottom: 0;
+    display: flex;
+	overflow: hidden;
 }
 
 #members-list {
-    overflow-y: auto;
-    flex-grow: 1;
+    padding: 5px 5px 5px 5px;
+    overflow: atuo;
 }
 
 #members-list div{
@@ -56,5 +70,4 @@ html, body {
     border-color: black;
     margin: 1px 4px 1px 4px;
     padding: 10px 10px 10px 10px;
-    overflow: hidden;
 }
