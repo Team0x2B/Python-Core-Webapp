@@ -16,9 +16,11 @@ function hideInfoWindow() {
 function showInfoWindow(group) {
     document.getElementById("info-window").style.display = "block";
 
+    owner = group.members[0]; //this almost certainly doesn't work all the time
+
     document.getElementById("title").innerHTML = group.topic;
     document.getElementById("specific").innerHTML = group.dept + ": " + group.course_num;
-    document.getElementById("author").innerHTML = "Student";
+    document.getElementById("author").innerHTML = owner.username;
     document.getElementById("count").innerHTML = group.members.length;
     document.getElementById("info").innerHTML = group.desc;
     document.getElementById("more-details").href="/group_info/" + group.id;
