@@ -42,3 +42,7 @@ function closeMyGroups() {
     //document.getElementById("group_info_section").style.display = "none";
     closeSidebar();
 }
+
+function openMyGroup() {
+
+}

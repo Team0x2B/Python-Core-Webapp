@@ -58,7 +58,7 @@ def add_to_group(group_id):
 
     if not group or not user:
         return error_status()
-    if not group.can_user_join(user):
+    if not group.can_user_join(user) or len(user.groups) > 0:
         return error_status()
 
     group.add_member(user, "NORMAL")
