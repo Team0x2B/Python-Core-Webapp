@@ -1,3 +1,5 @@
+var known_group_members = []
+
 function get_group_info(group_id) {
    return $.ajax({
         url: "/api/get_group_by_id/" + group_id,
@@ -35,7 +37,6 @@ function do_build_info_popout(group_response, user_permissions_response) {
     setText(document.getElementById("group-info-author"), group.members[0].username);
     setText(document.getElementById("group-info-time"), "Feature Coming Soon");
     setText(document.getElementById("group-info-description"), group.desc);
-
 
     create_action_button(user_permissions);
     create_members_list(group.members);
@@ -94,6 +95,6 @@ function create_action_button(user_permissions) {
     }
 }
 
-function fast_update(action_button_attributes) {
-
+function fast_update_remove(user_permissions) {
+    create_action_button(user_permissions);
 }

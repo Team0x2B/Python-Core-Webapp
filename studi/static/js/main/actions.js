@@ -9,6 +9,7 @@ function joinGroup(id) {
             construct_group_info_popout(id);
         }
     });
+    fast_update_remove({can_leave: true})
     construct_group_info_popout(id);
 }
 
@@ -22,7 +23,7 @@ function leaveGroup(id) {
             construct_group_info_popout(id);
         }
     });
-
+    fast_update_remove({can_join: true})
 }
 
 function deleteGroup(id) {
