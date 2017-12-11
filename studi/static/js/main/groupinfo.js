@@ -97,3 +97,7 @@ function create_action_button(group_id, user_permissions) {
         detailed_info.removeChild(action_button);
     }
 }
+
+function fast_update_remove(group_id, user_permissions) {
+    create_action_button(group_id, user_permissions);
+}
