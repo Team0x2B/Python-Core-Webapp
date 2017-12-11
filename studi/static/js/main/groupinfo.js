@@ -120,7 +120,8 @@ function initMiniMap() {
                 zoom: 16,
                 clickableIcons: false,
                 disableDefaultUI: true,
-                gestureHandling: false
+                gestureHandling: 'none',
+                zoomControl: false
             }
     );
     marker = new google.maps.Marker({position: center,map: minimap, style: {fill: '#76c043'} });
