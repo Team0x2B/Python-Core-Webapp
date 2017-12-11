@@ -15,7 +15,8 @@ function initMap() {
                 center: pos,
                 zoom: 16,
                 disableDefaultUI: true,
-                gestureHandling: 'greedy'
+                gestureHandling: 'greedy',
+                clickableIcons: false
             }
          );
 

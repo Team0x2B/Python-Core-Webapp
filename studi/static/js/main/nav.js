@@ -34,6 +34,7 @@ function openMyGroups(group_id) {
     openSidebar();
     construct_group_info_popout(group_id);
     document.getElementById("groups-sidebar").style.width = "100%";
+    google.maps.event.trigger(minimap, 'resize');
 }
 
 function closeMyGroups() {

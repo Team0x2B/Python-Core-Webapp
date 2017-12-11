@@ -22,9 +22,9 @@ def handle_not_logged_in():
     return error_status()
 
 
-@app.route('/extern/api/googlemaps')
-def get_maps_data():
-    return requests.get("https://maps.googleapis.com/maps/api/js?key=AIzaSyBjznhok9lVS9qwe2DzQmJXg9TA2Ye2qkk&callback=initMap").content
+@app.route('/extern/api/googlemaps/<string:callback>')
+def get_maps_data(callback):
+    return requests.get("https://maps.googleapis.com/maps/api/js?key=AIzaSyBjznhok9lVS9qwe2DzQmJXg9TA2Ye2qkk&callback="+callback).content
 
 
 @app.route('/api/getUsers')

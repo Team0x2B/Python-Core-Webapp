@@ -1,4 +1,7 @@
 var current_group_id = -1;
+var current_group_location = [0, 0];
+var minimap;
+var marker;
 function get_group_info(group_id) {
    return $.ajax({
         url: "/api/get_group_by_id/" + group_id,
@@ -35,8 +38,13 @@ function construct_group_info_popout(group_id) {
 }
 
 function do_build_info_popout(group) {
+    current_group_location = [group.latitude, group.longitude];
+    if (!minimap) {
+        initMiniMap();
+    }
     user_permissions = group.allowed_actions;
     if (current_group_id != group.id) {
+        centerMiniMap();
         setText(document.getElementById("group-info-title"), group.topic);
         setText(document.getElementById("group-info-subtitle"), group.dept + ": " + group.course_num);
         setText(document.getElementById("group-info-author"), group.members[0].username);
@@ -101,4 +109,28 @@ function create_action_button(group_id, user_permissions) {
 
 function fast_update_remove(group_id, user_permissions) {
     create_action_button(group_id, user_permissions);
+}
+
+function initMiniMap() {
+    console.log(current_group_location);
+    center = new google.maps.LatLng(current_group_location[0], current_group_location[1]);
+    minimap = new google.maps.Map(document.getElementById('minimap'),
+            {
+                center: center,
+                zoom: 16,
+                clickableIcons: false,
+                disableDefaultUI: true,
+                gestureHandling: false
+            }
+    );
+    marker = new google.maps.Marker({position: center,map: minimap, style: {fill: '#76c043'} });
+    google.maps.event.addListenerOnce(minimap, 'idle', function(){
+        document.getElementById('minimap').firstChild.firstChild.childNodes[1].style.position = "relative";
+    });
+
+}
+
+function centerMiniMap() {
+    minimap.setCenter(new google.maps.LatLng(current_group_location[0], current_group_location[1]));
+
 }
