@@ -93,13 +93,7 @@ function create_action_button(group_id, user_permissions) {
         action_button.setAttribute('id', 'delete-button');
         action_button.setAttribute("onclick", "deleteGroup(" + group_id + ");");
         setText(action_button, "Delete Group");
-    } else {
-        if (action_button) {
-            detailed_info.removeChild(action_button);
-        }
+    } else if (action_button) {
+        detailed_info.removeChild(action_button);
     }
-}
-
-function fast_update_remove(group_id, user_permissions) {
-    create_action_button(group_id, user_permissions);
 }

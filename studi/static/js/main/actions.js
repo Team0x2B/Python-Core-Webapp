@@ -7,7 +7,6 @@ function joinGroup(id) {
         contentType: "application/json",
         success: do_build_info_popout
     });
-    fast_update_remove(id, {can_leave: true})
     construct_group_info_popout(id);
 }
 
@@ -20,7 +19,6 @@ function leaveGroup(id) {
         contentType: "application/json",
         success: do_build_info_popout
     });
-    fast_update_remove(id, {can_join: true})
 }
 
 function deleteGroup(id) {
