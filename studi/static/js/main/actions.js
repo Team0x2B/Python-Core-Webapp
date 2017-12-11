@@ -8,7 +8,6 @@ function joinGroup(id) {
         contentType: "application/json",
         success: do_build_info_popout
     });
-    construct_group_info_popout(id);
 }
 
 function leaveGroup(id) {
