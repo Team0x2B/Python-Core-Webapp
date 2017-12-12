@@ -57,7 +57,7 @@ body {
     display: none;
     border-radius: 5px;
     padding: 5px;
-    max-width:90%;
+    max-width: calc(95% - 10px);
     max-height:65%;
 }
 
@@ -271,4 +271,5 @@ body {
 	text-decoration: none;
 	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
 	color: white;
+	border-radius: 15px;
 }
