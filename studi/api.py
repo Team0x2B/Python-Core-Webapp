@@ -22,9 +22,9 @@ def handle_not_logged_in():
     return error_status()
 
 
-@app.route('/extern/api/googlemaps')
-def get_maps_data():
-    return requests.get("https://maps.googleapis.com/maps/api/js?key=AIzaSyBjznhok9lVS9qwe2DzQmJXg9TA2Ye2qkk&callback=initMap").content
+@app.route('/extern/api/googlemaps/<string:callback>')
+def get_maps_data(callback):
+    return requests.get("https://maps.googleapis.com/maps/api/js?key=AIzaSyBjznhok9lVS9qwe2DzQmJXg9TA2Ye2qkk&callback="+callback).content
 
 
 @app.route('/api/getUsers')
@@ -80,7 +80,7 @@ def add_to_group(group_id):
     group.add_member(user, "NORMAL")
 
     s.commit()
-    return ok_status()
+    return get_group_by_id(group_id)
 
 
 @app.route('/api/delete_group/<int:group_id>', methods=['POST'])
@@ -123,7 +123,7 @@ def leave_group(group_id):
             to_remove = m
     group.members.remove(to_remove)
     db.session.commit()
-    return ok_status()
+    return get_group_by_id(group_id)
 
 
 @app.route('/api/get_study_groups', methods=['GET'])
@@ -157,6 +157,18 @@ def get_study_groups():
     return jsonify(results)
 
 
+def get_generic_group_permissions(group):
+    if not session.get("logged_in"):
+        return {"can_join": False, "can_leave": False, "can_delete": False}
+    user = db.session.query(User).filter(User.id == session["user_id"]).first()
+
+    return {
+        "can_join": group.can_user_join(user) and len(user.groups) == 0,
+        "can_leave": group.can_user_leave(user),
+        "can_delete": group.can_user_delete(user)
+    }
+
+
 @app.route('/api/get_group_by_id/<int:group_id>', methods=['GET'])
 def get_group_by_id(group_id):
     s = db.session
@@ -173,6 +185,7 @@ def get_group_by_id(group_id):
     d['course_num'] = group.course_num
     d['desc'] = group.description
     d['create_date'] = group.create_date
+    d['allowed_actions'] = get_generic_group_permissions(group)
     members = []
     for m in group.members:
         m_dict = dict()

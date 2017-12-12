@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='studi_icon.ico') }}">
     <link rel="stylesheet" type="text/css" href="../static/css/group_info.css" />
     <script src="../static/js/main/map.js"></script>
-    <script src="../extern/api/googlemaps" async defer></script>
+    <script src="../extern/api/googlemaps/initMap" async defer></script>
     <script src="../static/js/jquery.min.js"></script>
     <script src="../static/js/jquery.scrolly.min.js"></script>
     <script src="../static/js/skel.min.js"></script>
@@ -19,7 +19,7 @@
     <script src="../static/js/main/actions.js"></script>
 
     <script src="../static/js/main/groupinfo.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
 
 </head>
 <body>
@@ -31,27 +31,37 @@
                 </div>
                 <div id="search-bar">
                     <div id="align-placeholder">
-                        <input type="text" id="menu-search-field" class="study-search" value="" placeholder="What do you want to studi?" name="study-search">
+                        <input type="text" id="menu-search-field" class="study-search" value="" placeholder="Search Topic" name="study-search">
                     </div>
                 </div>
                 <div id="right-menu">
-
+                    <a href="javascript:void(0)" onclick="resetSearch();"> &times; </a>
                 </div>
             </div>
             <div id="info-window" class="info-window">
-                <p id="title">Group Topic</p>
-                <p id="specific">Group Specific Topic</p>
-                <p id="author">Group Owner</p>
-                <p id="count">Number of people</p>
-                <p id="info">Description</p>
-                <a id="more-details" onclick="hideInfoWindow(); openMyGroups(infoWindowGroup);" >More Details</a>
+                <div id="info-window-inner-div">
+                    <p id="title">Group Topic</p>
+                    <p id="specific">Group Specific Topic</p>
+                    <p id="author">Group Owner</p>
+                    <p id="count">Number of people</p>
+                    <p id="info">Description</p>
+                    <div id="more-details-div">
+                        <a id="more-details" href="javascript:void(0)" onclick="hideInfoWindow(); openMyGroups(infoWindowGroup);" >More Details</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="loading-info" style="align: center">
-                      <h1><br>
-                        <br>
-                        Now loading...</h1>
-                    </div>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            <h1 id="loading-message">
+                Now loading...
+            </h1>
+        </div>
 
         <div id="map"></div>
         <div id="main-sidebar-menu" class="sidebar-menu">
@@ -70,10 +80,10 @@
                 <div id="group-info-top-section" class="section">
                     <div id="group-info-detailed-group-info">
                         <p>
-                        <h1 id="group-info-title" align="right">Engineering</h1>
+                        <h2 id="group-info-title" align="right">Engineering</h2>
                         </p>
-                      <p><h2 id="group-info-subtitle" align="right">CSCI: 2400</h2></p>
-                        <p><h3 id="group-info-author" align="right">Ethan Hunter</h3></p>
+                      <p><h3 id="group-info-subtitle" align="right">CSCI: 2400</h3></p>
+                        <!--<p><h3 id="group-info-author" align="right">Ethan Hunter</h3></p>-->
                         <p><h4 id="group-info-time" align="right">Some Time</h4></p>
                     </div>
                  
@@ -83,19 +93,22 @@
                             Room #
                         </div>
                     </div>
+                    <div style="" id="group-info-border"> </div>
                  </div>
-                <div id="group-info-mid-section" class="section">
-                    <p id="group-info-description">
-                        Thi is a test description
-                    </p>
-                </div>
-                <div id="group-info-bottom-section" class="section">
-                    <div id="members-list-title">
-                        <h3 align="center">Members</h3>
+                <div id="group-info-scrolly">
+                    <div id="group-info-mid-section" class="section">
+                        <p id="group-info-description">
+                            Thi is a test description
+                        </p>
                     </div>
-                    <div id="members-list">
+                    <div id="group-info-bottom-section" class="section">
+                        <div id="members-list-title">
+                            <h3 align="center">Members</h3>
+                        </div>
+                        <div id="members-list"></div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

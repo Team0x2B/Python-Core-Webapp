@@ -1,22 +1,18 @@
-
 #group-info-container {
     width: 100%;
-    max-height: 100vh;
+    max-height: calc(100% - 60px);
     padding: 0 0 0 0;
-    overflow: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
-
-#delete-button {
-	color:#FF0000;
-}
-
 
 .section {
     width: 100%;
     display: flex;
     flex-direction: row;
     padding: 0 0 0 0;
-    overflow: hidden;
+    /* overflow: auto; */
 }
 
 #group-info-container {
@@ -24,15 +20,17 @@
 }
 
 #group-info-detailed-group-info {
-    flex-grow: 1;
+    flex-grow: 5;
+    font-size: 10.5pt;
     margin-top: 0;
     float: left;
     display: inline-block;
-	padding:0.5em;
-	font-family:Geneva, sans-serif;
-	background-color:white;
-	border-radius:5px;
-	
+    padding:0.5em;
+    font-family: Calibri light, sans-serif;
+    background-color:white;
+    border-radius: 0 5px 5px 0;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+    color: #02142f;
 }
 
 #group-info-detailed-group-info p {
@@ -40,18 +38,16 @@
 	font-family:Arial, Helvetica, sans-serif;
 }
 
-
-	
-
-
 #group-info-location-info {
-    flex-basis: 250px;
-    flex-grow: 3;
-    margin-left: 10px;
+    flex-basis: 200px;
+    flex-grow: 0;
     display: inline-block;
     float: right;
-    font-size: 15px;
-	font-family:Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-family: Calibri light, sans-serif;
+    color: white;
+    padding: 0 0 0 0;
+    margin: 0 10px 0 10px;
 }
 
 #group-info-mid-section p{
@@ -60,7 +56,6 @@
 	padding:0.7em;
     font-size: 13pt;
 	font-family:Arial, Helvetica, sans-serif;
-	
 }
 #group-info-mid-section{
 	margin-top:1em;
@@ -71,12 +66,15 @@
 	
 	border-radius:5px;
 	size:auto;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
 }
 
 #minimap {
-    width: 100%;
+    width: 200px;
     height: 200px;
     background-color:#CCCCCC;
+    border-radius:5px;
+    z-index: 100;
 }
 
 #group-info-bottom-section {
@@ -99,10 +97,81 @@
     border: 1px;
     border-style: solid;
     border-color: #999;
-	border-radius:5px;
-	background-color:white;
-	color:#4696e5;
+    border-radius:5px;
+    background-color:white;
+    color: #02142f;
     margin: 1px 4px 1px 4px;
     padding: 10px 10px 10px 10px;
-	font-family:Arial, Helvetica, sans-serif;
+    font-family: Calibri light, sans-serif;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+    font-size: 17px;
+}
+
+div#group-info-border {
+    width: 100px;
+    flex: 10;
+    background-color: white;
+    border-radius: 5px 0 0 5px;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+}
+
+#groups-sidebar .closebtn {
+    color: white;
+}
+
+div#group-info-top-section {
+    background-color: #445d75;
+    padding: 16px 0 16px 0;
+    box-shadow: inset 0px -3px 20px rgba(0,0,0,0.2), inset 0px 3px 20px rgba(0,0,0,0.2);
+    min-height: calc(210px + 0.5em);
+    flex: 1;
+}
+
+.action-button {
+    border: solid;
+    border-radius: 10px;
+    float:  right;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 15px;
+}
+
+
+#delete-button {
+	color: white;
+	background-color: darkred;
+	font-family: Calibri light, sans-serif;
+	padding: 6px 6px 6px 6px;
+	margin: 0 0 0 0;
+	float: right;
+	border-color: darkred;
+	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+	font-size: 18px;
+}
+
+#join-button {
+    color: white;
+    padding: 6px 6px 6px 6px;
+    margin: 0 0 0 0;
+    background-color: green;
+    border-color: green;
+    font-size: 18px;
+}
+
+#leave-button {
+    background-color: purple;
+    color: white;
+    border-color: purple;
+    padding: 6px 6px 6px 6px;
+    margin: 0 0 0 0;
+    font-size: 18px;
+}
+
+#members-list-title {
+    color: white;
+}
+
+#group-info-scrolly {
+    overflow: auto;
+    flex-basis: 50%;
+    flex: 10;
 }
