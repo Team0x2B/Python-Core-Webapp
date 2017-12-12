@@ -5,10 +5,6 @@
     overflow: auto;
 }
 
-#delete-button {
-	color:#FF0000;
-}
-
 .section {
     width: 100%;
     display: flex;
@@ -126,4 +122,39 @@ div#group-info-top-section {
     padding: 16px 0 16px 0;
     box-shadow: inset 0px -3px 20px rgba(0,0,0,0.2), inset 0px 3px 20px rgba(0,0,0,0.2);
     /* box-shadow: 1px 6px 4px rgba(0, 0, 0, 0.2); */
+}
+
+.action-button {
+    border: solid;
+    border-radius: 10px;
+    float:  right;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+#delete-button {
+	color: white;
+	background-color: darkred;
+	font-family: Calibri light, sans-serif;
+	padding: 6px 6px 6px 6px;
+	margin: 0 0 0 0;
+	float: right;
+	border-color: darkred;
+	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#join-button {
+    color: white;
+    padding: 6px 6px 6px 6px;
+    margin: 0 0 0 0;
+    background-color: green;
+    border-color: green;
+}
+
+#leave-button {
+    background-color: purple;
+    color: white;
+    border-color: purple;
+    padding: 6px 6px 6px 6px;
+    margin: 0 0 0 0;
 }
