@@ -1,4 +1,4 @@
-
+window.history.replaceState({info: false}, "group_info", "/");
 var infoWindowGroup = -1;
 
 window.onpopstate = function(event) {
@@ -29,12 +29,11 @@ function showInfoWindow(group) {
 
     owner = group.members[0]; //this almost certainly doesn't work all the time
 
-    document.getElementById("title").innerHTML = group.topic;
-    document.getElementById("specific").innerHTML = group.dept + ": " + group.course_num;
-    document.getElementById("author").innerHTML = owner.username;
-    document.getElementById("count").innerHTML = group.members.length;
-    document.getElementById("info").innerHTML = group.desc;
-//    document.getElementById("more-details").href="/group_info/" + group.id;
+    document.getElementById("title").innerText = group.topic;
+    document.getElementById("specific").innerText = group.dept + ": " + group.course_num;
+    document.getElementById("author").innerText = owner.username;
+    document.getElementById("count").innerText = group.members.length;
+    document.getElementById("info").innerText = group.desc;
 }
 
 function openMyGroups(group_id) {
