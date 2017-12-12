@@ -108,7 +108,7 @@
     font-size: 17px;
 }
 
-#group-info-border {
+div#group-info-border {
     width: 100px;
     flex: 10;
     background-color: white;
@@ -120,7 +120,7 @@
     color: white;
 }
 
-#group-info-top-section {
+div#group-info-top-section {
     background-color: #445d75;
     padding: 16px 0 16px 0;
     box-shadow: inset 0px -3px 20px rgba(0,0,0,0.2), inset 0px 3px 20px rgba(0,0,0,0.2);
