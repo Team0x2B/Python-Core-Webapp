@@ -110,7 +110,7 @@ body {
 }
 
 .info-window #title {
-	font-family:Arial, Helvetica, sans-serif;
+	font-family: Calibri Light;
 	font-weight: bold;
 	font-size: 20px;
 	float: left;
@@ -123,7 +123,7 @@ body {
     font-weight: 100;
     font-size: 20px;
     color: #a9a9a9;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Calibri Light, sans-serif;
     padding-left: 10px;
     padding-top: 10px;
 }
@@ -135,7 +135,7 @@ body {
     float: left;
     padding-right: 10px;
     padding-left: 10px;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Calibri Light, sans-serif;
 }
 
 .info-window #count {
@@ -143,7 +143,7 @@ body {
     font-size: 15px;
     color: #a9a9a9;
     padding-right: 10px;
-	font-family:Arial, Helvetica, sans-serif
+    font-family: Calibri Light, sans-serif;
 }
 .info-window #info {
     font-weight: 100px;
@@ -151,7 +151,7 @@ body {
     color:#000;
     padding-right: 10px;
     padding-left: 10px;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Calibri Light, sans-serif;
 }
 .info-window #more-details {
     padding-right: 10px;
