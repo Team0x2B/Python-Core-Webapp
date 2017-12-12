@@ -29,7 +29,7 @@
     padding:0.5em;
     font-family: Calibri light, sans-serif;
     background-color:white;
-    border-radius:5px;
+    border-radius: 0 5px 5px 0;
     box-shadow: 1px 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
     color: #02142f;
 }
@@ -112,7 +112,7 @@ div#group-info-border {
     width: 100px;
     flex: 10;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 5px 0 0 5px;
     box-shadow: 1px 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
 }
 
