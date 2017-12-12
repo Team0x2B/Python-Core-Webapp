@@ -47,7 +47,7 @@ function do_build_info_popout(group) {
         setText(document.getElementById("group-info-title"), group.topic);
         setText(document.getElementById("group-info-subtitle"), group.dept + ": " + group.course_num);
 //        setText(document.getElementById("group-info-author"), group.members[0].username);
-        setText(document.getElementById("group-info-time"), "Feature Coming Soon");
+        setText(document.getElementById("group-info-time"), group.create_date.substring(0, 16));
         setText(document.getElementById("group-info-description"), group.desc);
         current_group_id = group.id;
     }
