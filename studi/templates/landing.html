@@ -30,7 +30,7 @@
 	<body id="top" onload="pageInit()">
 
 		<!-- Header -->
-		<header id="header">
+		<header id="header" style="height: 100vh">
 			<div class="content">
         <h1><a href="#">Welcome <div id=curname></div></a></h1>
 				<p>What would you like to Studi today?</p>
@@ -41,7 +41,7 @@
 		</header>
 
 		<!-- One -->
-		<section id="one" class="wrapper">
+		<section id="one" class="wrapper" style="height: 100vh">
 			<div class="inner alt">
 				<section class="spotlight" >
 					<div class="content" style="width:100%">
@@ -59,7 +59,7 @@
 
 
         <!-- Two -->
-		<section id="two" class="wrapper style2 special">
+		<section id="two" class="wrapper style2 special" style="height: 100vh">
 			<header class="major">
 				<h2>What are you studying?</h2>
 			</header>
@@ -70,21 +70,19 @@
 						<li><input id="humn" name="topic" type="radio"><label for="humn">Humanities</label></li>
 						<li><input id="engr" name="topic" type="radio"><label for="engr">Engineering</label></li>
 					</ul>
-					<ul class="actions fit">
+					<ul class="actions fit" style="margin-botton: 10px;">
 						<li><input id="math" name="topic" type="radio"><label for="math">Math</label></li>
 						<li><input id="nats" name="topic" type="radio"><label for="nats">Natural Science</label></li>
 						<li><input id="soci" name="topic" type="radio"><label for="soci">Social Science</label></li>
 					</ul>
-
-					<div class="content">
-						<!--<div class="12u$">-->
+					<br>
+ 						<div class="12u$">
 							Department:
 					  		<input type="text" style="text-align:center" id="dept" placeholder="CSCI">
 							Course Number:
 					  		<input type="text" style="text-align:center" id="course-id" placeholder="1000">
-			    		<!--</div>-->
-					</div>
-					<div class="content">
+			    		</div>
+					<div class="content" style="width: 100%;">
 						Description:
 						<textarea style="height: 10em" id="description"></textarea>
 					</div>
