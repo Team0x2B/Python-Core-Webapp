@@ -1,6 +1,14 @@
 
 var infoWindowGroup = -1;
 
+window.onpopstate = function(event) {
+    console.log(event);
+    state = event.state;
+    if (!state.info) {
+        closeMyGroups();  
+    }
+}
+
 function openSidebar() {
     document.getElementById("main-sidebar-menu").style.width = "250px";
     document.getElementById("opaque").style.display = "block"
@@ -30,6 +38,7 @@ function showInfoWindow(group) {
 }
 
 function openMyGroups(group_id) {
+    window.history.pushState({info: true, gid: group_id}, "group_info", "group_info");
     console.log("oy vey");
     openSidebar();
     construct_group_info_popout(group_id);
@@ -41,13 +50,12 @@ function openMyGroups(group_id) {
      });
     document.getElementById("groups-sidebar").style.width = "100%";
     console.log("moving sidebar");
-
 }
 
 function closeMyGroups() {
     console.log("oy vey");
     document.getElementById("groups-sidebar").style.width = "0";
-    //document.getElementById("group_info_section").style.display = "none";
+    window.history.replaceState({info: false}, "group_info", "/")
     closeSidebar();
 }
 
