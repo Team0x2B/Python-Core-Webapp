@@ -32,7 +32,7 @@ function initMap() {
                 console.log(val.id+":"+val.latitude+","+val.longitude+" "+val.topic);
                 console.log("current location: " + position.coords.latitude + ", " + position.coords.longitude)
                 pos = new google.maps.LatLng(val.latitude,val.longitude);
-                group = new google.maps.Marker({position: pos,map: map, title: val.topic, style: {fill: '#76c043'} });
+                group = new google.maps.Marker({position: pos,map: map, title: val.topic, style: {fill: 'blue'} });
 
                 google.maps.event.addListener(group,'click', (function(group,key){
                     return function() {
