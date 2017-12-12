@@ -154,15 +154,11 @@ body {
     font-family:Arial, Helvetica, sans-serif;
 }
 .info-window #more-details {
-    font-weight: 100px;
-    font-size: 15px;
-    color:#06F;
     padding-right: 10px;
-    padding-top: 30px;
-    padding-left: 10px;
-    text-height:auto;
-    font-family:Arial, Helvetica, sans-serif
-	bottom: 10px;
+    padding: 10px 10px 10px 10px;
+    color: white;
+    text-decoration: none;
+    font-family: Calibri light, sans-serif;
 }
 
 #info-window-inner-div {
@@ -265,10 +261,14 @@ body {
 	
 }
 
-#info-window-final-div {
-	margin: 5px 5px 5px 5px;
-	background-color: white;
-	height: 100%;
-	width: 100%;
-	/* position: absolute; */
+#more-details-div {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	border: solid;
+	background-color: #2d6fb1;
+	border-color: #2d6fb0;
+	text-decoration: none;
+	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+	color: white;
 }
