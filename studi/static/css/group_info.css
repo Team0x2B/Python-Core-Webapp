@@ -22,15 +22,16 @@
 }
 
 #group-info-detailed-group-info {
-    flex-grow: 1;
+    flex-grow: 5;
     margin-top: 0;
     float: left;
     display: inline-block;
-	padding:0.5em;
-	font-family:Geneva, sans-serif;
-	background-color:white;
-	border-radius:5px;
-	box-shadow: 1px 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+    padding:0.5em;
+    font-family: Calibri light, sans-serif;
+    background-color:white;
+    border-radius:5px;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+    color: #02142f;
 }
 
 #group-info-detailed-group-info p {
@@ -39,13 +40,15 @@
 }
 
 #group-info-location-info {
-    flex-basis: 250px;
-    flex-grow: 3;
-    margin-left: 10px;
+    flex-basis: 200px;
+    flex-grow: 0;
     display: inline-block;
     float: right;
-    font-size: 15px;
-	font-family:Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-family: Calibri light, sans-serif;
+    color: white;
+    padding: 0 0 0 0;
+    margin: 0 10px 0 10px;
 }
 
 #group-info-mid-section p{
@@ -95,11 +98,31 @@
     border: 1px;
     border-style: solid;
     border-color: #999;
-	border-radius:5px;
-	background-color:white;
-	color:#4696e5;
+    border-radius:5px;
+    background-color:white;
+    color: #02142f;
     margin: 1px 4px 1px 4px;
     padding: 10px 10px 10px 10px;
-	font-family:Arial, Helvetica, sans-serif;
-	box-shadow: 1px 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+    font-family: Calibri light, sans-serif;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+    font-size: 17px;
+}
+
+#group-info-border {
+    width: 100px;
+    flex: 10;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+}
+
+#groups-sidebar .closebtn {
+    color: white;
+}
+
+#group-info-top-section {
+    background-color: #445d75;
+    padding: 16px 0 16px 0;
+    box-shadow: inset 0px -3px 20px rgba(0,0,0,0.2), inset 0px 3px 20px rgba(0,0,0,0.2);
+    /* box-shadow: 1px 6px 4px rgba(0, 0, 0, 0.2); */
 }

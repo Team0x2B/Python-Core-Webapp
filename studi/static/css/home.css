@@ -159,7 +159,7 @@ body {
 	text-height:auto;
 	
 	font-family:Arial, Helvetica, sans-serif
-	
+	bottom: 10px;
 }
 
 #left-menu {
@@ -235,7 +235,7 @@ body {
 #groups-sidebar {
     max-width: 450px;
     z-index: 11;
-	background-color:#4696e5;
+    background-color: #2d6fb1;
 }
 
 #groups-sidebar iframe {
