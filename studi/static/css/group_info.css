@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 #group-info-container {
     width: 100%;
@@ -70,4 +71,113 @@
     border-color: black;
     margin: 1px 4px 1px 4px;
     padding: 10px 10px 10px 10px;
+=======
+
+#group-info-container {
+    width: 100%;
+    max-height: 100vh;
+    padding: 0 0 0 0;
+    overflow: auto;
+}
+
+#delete-button {
+	color:#FF0000;
+}
+
+
+.section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0 0 0 0;
+    overflow: hidden;
+}
+
+#group-info-container {
+    float: center;
+}
+
+#group-info-detailed-group-info {
+    flex-grow: 1;
+    margin-top: 0;
+    float: left;
+    display: inline-block;
+	padding:0.5em;
+	font-family:Geneva, sans-serif;
+	background-color:white;
+	border-radius:5px;
+	
+}
+
+#group-info-detailed-group-info p {
+    padding: 5px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+
+	
+
+
+#group-info-location-info {
+    flex-basis: 250px;
+    flex-grow: 3;
+    margin-left: 10px;
+    display: inline-block;
+    float: right;
+    font-size: 15px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+#group-info-mid-section p{
+	margin-top:.5em;
+	margin-bottom:.5em;
+	padding:0.7em;
+    font-size: 13pt;
+	font-family:Arial, Helvetica, sans-serif;
+	
+}
+#group-info-mid-section{
+	margin-top:1em;
+	margin-bottom:1em;
+	width:96%;
+	margin-left:8px;
+	background-color:white;
+	
+	border-radius:5px;
+	size:auto;
+}
+
+#minimap {
+    width: 100%;
+    height: 200px;
+    background-color:#CCCCCC;
+}
+
+#group-info-bottom-section {
+    height: 100%;
+    min-height: -webkit-min-content;
+    flex-direction: column;
+    bottom: 0;
+    display: flex;
+	overflow: hidden;
+}
+
+#members-list {
+    padding: 5px 5px 5px 5px;
+    overflow: atuo;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+#members-list div{
+    text-align: center;
+    border: 1px;
+    border-style: solid;
+    border-color: #999;
+	border-radius:5px;
+	background-color:white;
+	color:#4696e5;
+    margin: 1px 4px 1px 4px;
+    padding: 10px 10px 10px 10px;
+	font-family:Arial, Helvetica, sans-serif;
+>>>>>>> master
 }
