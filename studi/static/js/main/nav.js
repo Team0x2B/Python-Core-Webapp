@@ -1,4 +1,4 @@
-
+window.history.replaceState({info: false}, "group_info", "/");
 var infoWindowGroup = -1;
 
 window.onpopstate = function(event) {
