@@ -31,7 +31,7 @@
                 </div>
                 <div id="search-bar">
                     <div id="align-placeholder">
-                        <input type="text" id="menu-search-field" class="study-search" value="" placeholder="what do you want to study?" name="study-search">
+                        <input type="text" id="menu-search-field" class="study-search" value="" placeholder="What do you want to studi?" name="study-search">
                     </div>
                 </div>
                 <div id="right-menu">
@@ -44,9 +44,14 @@
                 <p id="author">Group Owner</p>
                 <p id="count">Number of people</p>
                 <p id="info">Description</p>
-                <a id="more-details" onclick="hideInfoWindow(); openMyGroups(infoWindowGroup);">More Details</a>
+                <a id="more-details" onclick="hideInfoWindow(); openMyGroups(infoWindowGroup);" >More Details</a>
             </div>
         </div>
+        <div id="loading-info" style="align: center">
+                      <h1><br>
+                        <br>
+                        Now loading...</h1>
+                    </div>
 
         <div id="map"></div>
         <div id="main-sidebar-menu" class="sidebar-menu">
@@ -64,13 +69,16 @@
             <div id="group-info-container">
                 <div id="group-info-top-section" class="section">
                     <div id="group-info-detailed-group-info">
-                        <p><h1 id="group-info-title" align="right">Engineering</h1></p>
-                        <p><h2 id="group-info-subtitle" align="right">CSCI: 2400</h2></p>
+                        <p>
+                        <h1 id="group-info-title" align="right">Engineering</h1>
+                        </p>
+                      <p><h2 id="group-info-subtitle" align="right">CSCI: 2400</h2></p>
                         <p><h3 id="group-info-author" align="right">Ethan Hunter</h3></p>
                         <p><h4 id="group-info-time" align="right">Some Time</h4></p>
                     </div>
+                 
                     <div id="group-info-location-info">
-                        <div id="minimap">Loading...</div>
+                      <div id="minimap">Loading...</div>
                         <div id="Room">
                             Room #
                         </div>
@@ -92,8 +100,5 @@
         </div>
     </div>
     <div id="opaque"></div>
-    <div id="loading-info" style="align: center">
-        <h1><br><br>Now loading...</h1>
-    </div>
 </body>
 </html>
