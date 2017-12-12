@@ -2,7 +2,9 @@
     width: 100%;
     max-height: calc(100% - 60px);
     padding: 0 0 0 0;
-    overflow: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .section {
@@ -10,7 +12,7 @@
     display: flex;
     flex-direction: row;
     padding: 0 0 0 0;
-    overflow: auto;
+    /* overflow: auto; */
 }
 
 #group-info-container {
@@ -121,7 +123,8 @@ div#group-info-top-section {
     background-color: #445d75;
     padding: 16px 0 16px 0;
     box-shadow: inset 0px -3px 20px rgba(0,0,0,0.2), inset 0px 3px 20px rgba(0,0,0,0.2);
-    /* box-shadow: 1px 6px 4px rgba(0, 0, 0, 0.2); */
+    min-height: calc(210px + 0.5em);
+    flex: 1;
 }
 
 .action-button {
@@ -129,6 +132,7 @@ div#group-info-top-section {
     border-radius: 10px;
     float:  right;
     box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 15px;
 }
 
 
@@ -141,6 +145,7 @@ div#group-info-top-section {
 	float: right;
 	border-color: darkred;
 	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+	font-size: 18px;
 }
 
 #join-button {
@@ -149,6 +154,7 @@ div#group-info-top-section {
     margin: 0 0 0 0;
     background-color: green;
     border-color: green;
+    font-size: 18px;
 }
 
 #leave-button {
@@ -157,4 +163,15 @@ div#group-info-top-section {
     border-color: purple;
     padding: 6px 6px 6px 6px;
     margin: 0 0 0 0;
+    font-size: 18px;
+}
+
+#members-list-title {
+    color: white;
+}
+
+#group-info-scrolly {
+    overflow: auto;
+    flex-basis: 50%;
+    flex: 10;
 }
