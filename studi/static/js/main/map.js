@@ -45,7 +45,15 @@ function initMap() {
 
         });
     }, function error (err) {
-        alert("geolocation error: " + err.message + " code: " + err.code);
+        console.log("loading failed");
+        document.getElementById("map").style.display = "none";
+        loading_message = document.getElementById("loading-message");
+        loading_message.removeChild(loading_message.firstChild);
+        failure_link = document.createElement("a");
+        failure_link.setAttribute("href", "/home");
+        failure_message = document.createTextNode("Failed to Load Studi (Click to retry)");
+        failure_link.appendChild(failure_message);
+        loading_message.appendChild(failure_link);
     }, {maximumAge:600000, timeout:5000, enableHighAccuracy: true}); // end getCurrentPosition
     console.log("hello");
 
